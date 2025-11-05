@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import BreadcrumbArea from "../components/BreadcrumbArea";
-import CourseCard from "../components/CourseCard";
-import CourseListItem from "../components/CourseListItem";
+import CourseCard from "../components/cards/CourseCard";
+import CourseListItem from "../components/cards/CourseListItem";
 import courses from "../data/courses.json";
 
 const Courses = () => {
