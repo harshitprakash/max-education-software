@@ -1,0 +1,149 @@
+{
+  "count": 12,
+  "courses": [
+    {
+      "id": 1,
+      "img": "img/grid/grid_1.png",
+      "courseLink": "course-details.html",
+      "category": "Data & Tech",
+      "badgeClass": "",
+      "heartLink": "#",
+      "discription": "Foundation course to understand about software is a field that deals with the understanding of software. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Basic of Python",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Mirnsdo .H"
+    },
+    {
+      "id": 2,
+      "img": "img/grid/grid_2.png",
+      "courseLink": "course-details.html",
+      "category": "Mechanical",
+      "badgeClass": "blue__color",
+      "heartLink": "#",
+      "discription": "Mechanical fundamentals and practicals is a field that deals with the fundamentals and practicals of mechanics. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Mechanical fundamentals and practicals",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Rinis Jhon"
+    },
+    {
+      "id": 3,
+      "img": "img/grid/grid_3.png",
+      "courseLink": "course-details.html",
+      "category": "Development",
+      "badgeClass": "pink__color",
+      "heartLink": "#",
+      "discription": "Full-stack development: from zero to deploy is a field that deals with the development of full-stack applications. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Full-stack development: from zero to deploy",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Jhon"
+    },
+    {
+      "id": 4,
+      "img": "img/grid/grid_4.png",
+      "courseLink": "course-details.html",
+      "category": "Ui & UX Design",
+      "badgeClass": "green__color",
+      "heartLink": "#",
+      "discription": "UI/UX design: research to prototype is a field that deals with the design of user interfaces and user experiences. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "UI/UX design: research to prototype",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Robin"
+    },
+    {
+      "id": 5,
+      "img": "img/grid/grid_5.png",
+      "courseLink": "course-details.html",
+      "category": "Data & Tech",
+      "badgeClass": "orange__color",
+      "heartLink": "#",
+      "discription": "Data analysis and visualization basics is a field that deals with the analysis and visualization of data. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Data analysis and visualization basics",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Robin"
+    },
+    {
+      "id": 6,
+      "img": "img/grid/grid_6.png",
+      "courseLink": "course-details.html",
+      "category": "Big Data",
+      "badgeClass": "yellow__color",
+      "heartLink": "#",
+      "discription": "Big data processing & pipelines is a field that deals with the processing and analysis of big data. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Big data processing & pipelines",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Robin"
+    },
+    {
+      "id": 7,
+      "img": "img/grid/grid_1.png",
+      "courseLink": "course-details.html",
+      "category": "Data & Tech",
+      "badgeClass": "",
+      "heartLink": "#",
+      "discription": "Product management essentials is a field that deals with the management of products. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Product management essentials",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Mirnsdo .H"
+    },
+    {
+      "id": 8,
+      "img": "img/grid/grid_2.png",
+      "courseLink": "course-details.html",
+      "category": "Mechanical",
+      "badgeClass": "blue__color",
+      "heartLink": "#",
+      "discription": "Advanced mechanics workshop is a field that deals with the study of mechanics. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Advanced mechanics workshop",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Rinis Jhon"
+    },
+    {
+      "id": 9,
+      "img": "img/grid/grid_3.png",
+      "courseLink": "course-details.html",
+      "category": "Development",
+      "badgeClass": "pink__color",
+      "heartLink": "#",
+      "discription": "React is a JavaScript library for building user interfaces. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "React & modern frontend patterns",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Jhon"
+    },
+    {
+      "id": 10,
+      "img": "img/grid/grid_4.png",
+      "courseLink": "course-details.html",
+      "category": "Ui & UX Design",
+      "badgeClass": "green__color",
+      "heartLink": "#",
+      "discription": "Design systems and accessibility is a field that deals with the design of systems that are accessible to all users. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Design systems and accessibility",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Robin"
+    },
+    {
+      "id": 11,
+      "img": "img/grid/grid_5.png",
+      "courseLink": "course-details.html",
+      "category": "Data & Tech",
+      "badgeClass": "orange__color",
+      "heartLink": "#",
+      "discription": "Machine learning is a subfield of artificial intelligence that focuses on building algorithms that can learn from and make predictions on data. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Machine learning fundamentals",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Robin"
+    },
+    {
+      "id": 12,
+      "img": "img/grid/grid_6.png",
+      "courseLink": "course-details.html",
+      "category": "Big Data",
+      "badgeClass": "yellow__color",
+      "heartLink": "#",
+      "discription": "Streaming data and real-time analytics is a field that deals with the collection, processing, and analysis of data in real-time. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
+      "title": "Streaming data and real-time analytics",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Micle Robin"
+    }
+  ]
+}

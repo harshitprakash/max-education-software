@@ -20,3 +20,7 @@ html.is_dark {
   color: #eee !important;
 }
 
+.justitfy-center-p{
+  text-align: justify;
+  font-size: 14px;
+}
