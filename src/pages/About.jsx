@@ -1,10 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import VanillaTilt from "vanilla-tilt";
 
 const AboutPage = () => {
+  const tiltRef = useRef(null);
+
   useEffect(() => {
+    // Initialize AOS
     AOS.init({ duration: 1000 });
+
+    // Initialize VanillaTilt
+    if (tiltRef.current) {
+      VanillaTilt.init(tiltRef.current, {
+        max: 25,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.5,
+      });
+    }
   }, []);
 
   return (
@@ -65,7 +79,8 @@ const AboutPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-6" data-aos="fade-up">
-              <div className="aboutarea__5__img" data-tilt>
+              {/* Updated: Add ref for VanillaTilt */}
+              <div className="aboutarea__5__img" ref={tiltRef}>
                 <img
                   loading="lazy"
                   src="img/about/about_14.png"
@@ -87,19 +102,18 @@ const AboutPage = () => {
 
                 <div className="about__text__5">
                   <p>
-                    Located at <strong>Maa Jawala Complex, Near Jain Garments, Samaypur, Samaypur Badli, Delhi – 110042</strong>, 
-                    Max Education is a reputed institute committed to empowering students and professionals with 
-                    high-quality computer training and practical skills development.
+                    Located at{" "}
+                    <strong>
+                      Maa Jawala Complex, Near Jain Garments, Samaypur, Samaypur Badli, Delhi – 110042
+                    </strong>
+                    , Max Education is a reputed institute committed to empowering students and
+                    professionals with high-quality computer training and practical skills development.
                   </p>
                 </div>
 
                 <div className="aboutarea__5__small__icon__wraper">
                   <div className="aboutarea__5__small__icon">
-                    <img
-                      loading="lazy"
-                      src="img/about/about_15.png"
-                      alt="icon"
-                    />
+                    <img loading="lazy" src="img/about/about_15.png" alt="icon" />
                   </div>
                   <div className="aboutarea__small__heading">
                     <span>10+ Years of Experience</span> in Computer Education & Skill Training
@@ -108,9 +122,9 @@ const AboutPage = () => {
 
                 <div className="aboutarea__para__5">
                   <p>
-                    Our mission is to create a modern, results-driven learning environment where learners 
-                    develop the confidence and expertise required to excel in today’s fast-paced job market. 
-                    We combine theoretical understanding with hands-on projects to ensure that every student 
+                    Our mission is to create a modern, results-driven learning environment where learners
+                    develop the confidence and expertise required to excel in today’s fast-paced job market.
+                    We combine theoretical understanding with hands-on projects to ensure that every student
                     gains real-world experience and industry-ready capabilities.
                   </p>
                 </div>
@@ -134,59 +148,31 @@ const AboutPage = () => {
             <div className="col-xl-12" data-aos="fade-up">
               <ul className="nav about__button__wrap" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
-                  <button
-                    className="single__tab__link active"
-                    data-bs-toggle="tab"
-                    data-bs-target="#about"
-                    type="button"
-                  >
+                  <button className="single__tab__link active" data-bs-toggle="tab" data-bs-target="#about" type="button">
                     About
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
-                    className="single__tab__link"
-                    data-bs-toggle="tab"
-                    data-bs-target="#courses"
-                    type="button"
-                  >
+                  <button className="single__tab__link" data-bs-toggle="tab" data-bs-target="#courses" type="button">
                     Courses
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
-                    className="single__tab__link"
-                    data-bs-toggle="tab"
-                    data-bs-target="#awards"
-                    type="button"
-                  >
+                  <button className="single__tab__link" data-bs-toggle="tab" data-bs-target="#awards" type="button">
                     Awards
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
-                    className="single__tab__link"
-                    data-bs-toggle="tab"
-                    data-bs-target="#education"
-                    type="button"
-                  >
+                  <button className="single__tab__link" data-bs-toggle="tab" data-bs-target="#education" type="button">
                     Education
                   </button>
                 </li>
               </ul>
             </div>
 
-            <div
-              className="tab-content tab__content__wrapper"
-              id="myTabContent"
-              data-aos="fade-up"
-            >
+            <div className="tab-content tab__content__wrapper" id="myTabContent" data-aos="fade-up">
               {/* About Tab */}
-              <div
-                className="tab-pane fade show active"
-                id="about"
-                role="tabpanel"
-              >
+              <div className="tab-pane fade show active" id="about" role="tabpanel">
                 <div className="col-xl-12">
                   <div className="aboutarea__content__tap__wraper">
                     <p className="paragraph__1">
