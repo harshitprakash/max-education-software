@@ -20,7 +20,109 @@ html.is_dark {
   color: #eee !important;
 }
 
-.justitfy-center-p{
+.justitfy-center-p {
   text-align: justify;
   font-size: 14px;
+}/* Card styling */
+.subject-icon svg, .subject-icon i {
+  width: 60px;  /* Desktop default */
+  height: 60px;
+  font-size: 2rem; /* for icon fonts */
+  color: #5F2DED;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card {
+  transition: all 0.3s ease, background-color 0.3s ease;
+  border-radius: 12px;
+}
+
+/* Smooth color transition for title & text */
+.card .card-title,
+.card .card-text {
+  transition: color 0.25s ease;
+}
+
+/* Hover effects */
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background-color: #5F2DED;
+}
+
+/* Title turns crimson on hover */
+.card:hover .card-title {
+  color: crimson !important;
+}
+
+/* Text turns white on hover */
+.card:hover .card-text {
+  color: #fff !important;
+}
+
+/* Icon turns white and pops slightly */
+.card:hover .subject-icon svg,
+.card:hover .subject-icon i {
+  color: #fff;
+  fill: currentColor;
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .subject-icon svg, .subject-icon i {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+  .card:hover {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 768px) {
+  .subject-icon svg, .subject-icon i {
+    width: 45px;
+    height: 45px;
+    font-size: 1.6rem;
+  }
+  .card:hover {
+    transform: scale(1.03);
+  }
+}
+
+@media (max-width: 480px) {
+  .subject-icon svg, .subject-icon i {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+  .card:hover {
+    transform: scale(1.02);
+  }
+}
+
+
+/* ========== Dark mode cards ========== */
+
+/* Dark mode cards */
+html.is_dark .card {
+  background-color: #1b1b1b !important; /* dark card background */
+  color: #eee !important;               /* main text color */
+  border-color: #333 !important;        /* optional border color */
+}
+
+/* Dark mode muted text inside cards */
+html.is_dark .card-text.text-muted {
+  color: #aaa !important;
+}
+
+/* Optional: card header background */
+html.is_dark .card-header {
+  background-color: transparent; /* keep it transparent or dark */
+}
+
+/* Optional: icons background in dark mode */
+html.is_dark .subject-icon.bg-light {
+  background-color: #2c2c2c !important;
 }

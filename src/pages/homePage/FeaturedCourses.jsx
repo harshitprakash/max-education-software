@@ -11,51 +11,54 @@ import "swiper/css/navigation";
 const courses = [
   {
     img: "img/grid/grid_7.png",
-    badge: "Data & Tech",
     duration: "6 Months",
-    price: "$32.00",
-    oldPrice: "$67.00",
+    price: "800 Rs",
+    oldPrice: "1000 Rs",
     free: true,
-    title: "Foundation course to understand software",
+    title: "Tally Prime ",
   
   },
   {
     img: "img/grid/grid_7.png",
-    badge: "Data & Tech",
     duration: "6 Months",
-    price: "$32.00",
-    oldPrice: "$67.00",
+    price: "800 Rs",
+    oldPrice: "1000 Rs",
     free: true,
-    title: "Foundation course to understand software",
+    title: "Basic Computer",
   
   },
   {
     img: "img/grid/grid_8.png",
-    badge: "Data & Tech",
     duration: "6 Months",
     price: "800 Rs",
     oldPrice: "1000 Rs",
-    title: "Foundation course to understand software"
+    title: "Advanced Excel"
   
   },
   {
     img: "img/grid/grid_9.png",
-    badge: "Data & Tech",
     duration: "6 Months",
-    price: "$32.00",
-    oldPrice: "$67.00",
+    price: "800 Rs",
+    oldPrice: "1000 Rs",
     free: true,
-    title: "Foundation course to understand software"
+    title: "Web Development"
 
   },
   {
     img: "img/grid/grid_7.png",
-    badge: "Data & Tech",
     duration: "6 Months",
-    price: "$32.00",
-    oldPrice: "$67.00",
+    price: "800 Rs",
+    oldPrice: "1000 Rs",
     free: true,
-    title: "Foundation course to understand software"
+    title: "Graphic Design"
+  },
+  {
+    img: "img/grid/grid_7.png",
+    duration: "6 Months",
+    price: "800 Rs",
+    oldPrice: "1000 Rs",
+    free: true,
+    title: "Digital Marketing"
   },
 ];
 
@@ -111,9 +114,7 @@ const FeaturedCourses = () => {
                     <Link to="/course-details">
                       <img loading="lazy" src={course.img} alt="grid" />
                     </Link>
-                    <div className="gridarea__small__button">
-                      <div className="grid__badge">{course.badge}</div>
-                    </div>
+                   
                     <div className="gridarea__small__icon">
                       <a href="#">
                         <i className="icofont-heart-alt"></i>
