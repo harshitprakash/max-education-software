@@ -107,9 +107,16 @@ html.is_dark {
 
 /* Dark mode cards */
 html.is_dark .card {
-  background-color: #1b1b1b !important; /* dark card background */
+  background-color:#17093E !important; /* dark card background */
   color: #eee !important;               /* main text color */
-  border-color: #333 !important;        /* optional border color */
+  border-color: #333 !important;  /* optional border color */
+  
+}
+html.is_dark .card:hover {
+  background-color:#5F2DED !important; /* dark card background */
+  color: #eee !important;               /* main text color */
+  border-color: #333 !important;  /* optional border color */
+  
 }
 
 /* Dark mode muted text inside cards */
