@@ -251,3 +251,43 @@ html.is_dark .subject-icon.bg-light {
   pointer-events: none !important;
   cursor: not-allowed !important;
 }
+
+
+/* Mobile Menu Wrapper */
+.mobile-menu-wrap {
+  width: 100%;
+  background-color: #fff;
+  padding: 15px;
+}
+
+/* Force vertical list */
+.mobile-menu {
+  list-style: none !important;   /* remove bullets */
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;     /* force vertical */
+}
+
+/* Each menu item */
+.mobile-menu li {
+  display: block !important;     /* force block */
+  margin-bottom: 15px !important;
+  width: 100% !important;
+}
+
+/* Links styling */
+.mobile-menu li a {
+  display: block !important;     /* full width */
+  width: 100% !important;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.mobile-menu li a:hover {
+  background-color: #ff6600;
+  color: #fff;
+}
