@@ -1,12 +1,12 @@
-// src/components/Header.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import MobileMenu from "./MobileMenu"; // ← Import it
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
-  const openMobileMenu = () => {
-    document.body.classList.add("mobile-off-canvas-active");
-  };
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const openMobileMenu = () => setMobileMenuOpen(true);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <header>
@@ -30,31 +30,10 @@ const Header = () => {
               <div className="headerarea__main__menu">
                 <nav>
                   <ul>
-                     <li>
-                      <a className="headerarea__has__dropdown" href="/">
-                        Home <i className="icofont-rounded-down"></i>
-                      </a>
-                      
-                    </li>
-                    <li>
-                      <a className="headerarea__has__dropdown" href="/courses">
-                        Courses <i className="icofont-rounded-down"></i>
-                      </a>
-                      
-                    </li>
-                    <li>
-                      <a className="headerarea__has__dropdown" href="/about">
-                        About <i className="icofont-rounded-down"></i>
-                      </a>
-                    
-                    </li>
-                    <li>
-                      <a className="headerarea__has__dropdown" href="/contact">
-                        Contact Us <i className="icofont-rounded-down"></i>
-                      </a>
-                    
-                    </li>
-                
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
                   </ul>
                 </nav>
               </div>
@@ -84,7 +63,7 @@ const Header = () => {
             <div className="col-6">
               <div className="header-right-wrap">
                 <div className="mobile-off-canvas">
-                  <a className="mobile-aside-button" href="#" onClick={openMobileMenu}>
+                  <a className="mobile-aside-button" onClick={openMobileMenu}>
                     <i className="icofont-navigation-menu"></i>
                   </a>
                 </div>
@@ -94,8 +73,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU - RENDERED HERE */}
-      <MobileMenu />
+      {/* Mobile Menu */}
+      <MobileMenu isOpen={mobileMenuOpen} onClose={closeMobileMenu} />
     </header>
   );
 };
