@@ -187,9 +187,10 @@ const subjects = [
             <a className="default__button" href="/courses">
               View Courses
             </a>
-            <a className="default__button herobannerarea__button__3" href="#">
+            <a className="default__button herobannerarea__button__3" href="#Featured_courses">
               Explore More
             </a>
+
           </div>
         </div>
       </div>
@@ -412,7 +413,9 @@ const subjects = [
         </div>
 
 
-    <FeaturedCourses/>
+      <div id="Featured_courses">
+        <FeaturedCourses />
+      </div>
       
     </>
   );
