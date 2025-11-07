@@ -9,7 +9,7 @@ const MobileMenu = () => {
 
   return (
     <div className="mobile-off-canvas-active">
-      <a className="mobile-aside-close" onClick={closeMenu}>
+      <a className="mobile-aside-close" >
         <i className="icofont icofont-close-line"></i>
       </a>
 
@@ -20,11 +20,11 @@ const MobileMenu = () => {
         <div className="mobile-menu-wrap">
           <nav>
             <ul className="mobile-menu">
-              <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-              <li><Link to="/courses" onClick={closeMenu}>Courses</Link></li>
-              <li><Link to="/about" onClick={closeMenu}>About</Link></li>
-              <li><Link to="/contact" onClick={closeMenu}>Contact Us</Link></li>
-              <li><Link to="/login" onClick={closeMenu}>Login</Link></li>
+              <li><Link to="/" >Home</Link></li>
+              <li><Link to="/courses" >Courses</Link></li>
+              <li><Link to="/about" >About</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
+              <li><Link to="/login">Login</Link></li>
             </ul>
           </nav>
         </div>

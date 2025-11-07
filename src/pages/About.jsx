@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import VanillaTilt from "vanilla-tilt";
+import Mode from "../components/Mode";
 
 const AboutPage = () => {
   const tiltRef = useRef(null);
@@ -23,6 +24,7 @@ const AboutPage = () => {
 
   return (
     <>
+    <Mode/>
       {/* breadcrumbarea__section__start */}
       <div className="breadcrumbarea" data-aos="fade-up">
         <div className="container">

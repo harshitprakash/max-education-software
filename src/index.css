@@ -252,32 +252,37 @@ html.is_dark .subject-icon.bg-light {
   cursor: not-allowed !important;
 }
 
-
 /* Mobile Menu Wrapper */
 .mobile-menu-wrap {
   width: 100%;
   background-color: #fff;
   padding: 15px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode background for menu wrapper */
+html.is_dark .mobile-menu-wrap {
+  background-color: #17093E; /* dark card background */
 }
 
 /* Force vertical list */
 .mobile-menu {
-  list-style: none !important;   /* remove bullets */
+  list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  display: block !important;     /* force vertical */
+  display: block !important;
 }
 
 /* Each menu item */
 .mobile-menu li {
-  display: block !important;     /* force block */
+  display: block !important;
   margin-bottom: 15px !important;
   width: 100% !important;
 }
 
 /* Links styling */
 .mobile-menu li a {
-  display: block !important;     /* full width */
+  display: block !important;
   width: 100% !important;
   text-decoration: none;
   color: #333;
@@ -287,7 +292,19 @@ html.is_dark .subject-icon.bg-light {
   transition: background 0.3s, color 0.3s;
 }
 
+/* Dark mode link color */
+html.is_dark .mobile-menu li a {
+  color: #eee; /* light text matches dark cards */
+}
+
+/* Hover effect */
 .mobile-menu li a:hover {
-  background-color: #ff6600;
+  background-color: #5F2DED; /* primary purple */
+  color: #fff;
+}
+
+/* Optional: active / selected link style */
+html.is_dark .mobile-menu li a.active {
+  background-color: #5F2DED;
   color: #fff;
 }

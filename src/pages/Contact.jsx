@@ -1,9 +1,10 @@
 import React from "react";
 import { FaUser, FaEnvelope, FaEdit, FaPhone, FaPen } from "react-icons/fa";
-
+import Mode from "../components/Mode";
 const ContactPage = () => {
   return (
     <>
+    <Mode/>
       {/* Contact Info Section */}
       <div className="contact__section sp_top_100 sp_bottom_50" data-aos="fade-up">
         <div className="container">
