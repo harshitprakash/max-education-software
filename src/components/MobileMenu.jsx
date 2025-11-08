@@ -11,7 +11,7 @@ const MobileMenu = () => {
 const routePath = useLocation();
   return (
     <div className="mobile-off-canvas-active">
-      <a className="mobile-aside-close" >
+      <a className="mobile-aside-close" href="#">
         <i className="icofont icofont-close-line"></i>
       </a>
 
