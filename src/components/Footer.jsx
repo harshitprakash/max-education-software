@@ -95,10 +95,10 @@ const Footer = () => {
             <div className="col-xl-3 col-lg-3 text-end">
               <div className="footerarea__icon footerarea__icon__2">
                 <ul>
-                  <li><a href="#" target="_blank"><i className="icofont-facebook"></i></a></li>
-                  <li><a href="#" target="_blank"><i className="icofont-twitter"></i></a></li>
-                  <li><a href="#" target="_blank"><i className="icofont-linkedin"></i></a></li>
-                  <li><a href="#" target="_blank"><i className="icofont-instagram"></i></a></li>
+                  <li><a href="#"><i className="icofont-facebook"></i></a></li>
+                  <li><a href="#"><i className="icofont-twitter"></i></a></li>
+                  <li><a href="#"><i className="icofont-linkedin"></i></a></li>
+                  <li><a href="#"><i className="icofont-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
