@@ -156,9 +156,6 @@ html.is_dark .subject-icon.bg-light {
 .mission-vision h3 { color: #5F2DED; font-size: 22px; margin-bottom: 10px; font-weight: 600; }
 .mission-vision p { color: #555; font-size: 15px; line-height: 1.6; }
 
-/* =================== Container & Section Headings =================== */
-.container h2 { color: crimson; text-align: center; margin-bottom: 30px; }
-
 /* =================== Swiper & Arrows =================== */
 .swiper_parent, .gridarea__2, .gridarea__2 .container-fluid { position: relative; }
 .slider__arrows_side {

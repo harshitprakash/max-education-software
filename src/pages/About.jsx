@@ -97,11 +97,7 @@ const AboutPage = () => {
                   </p>
                 </div>
 
-                <div className="aboutarea__bottom__button__5">
-                  <a className="default__button" href="#more">
-                    More About <i className="icofont-long-arrow-right"></i>
-                  </a>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -195,9 +191,10 @@ const AboutPage = () => {
             <div className="section__title text-center">
               <div className="section__title__heading heading__underline">
                 <h2 style={{marginTop:"100px",color:"black"}}>
-                  Relied on marketers trusted by engineers and
-                  <br />
-                  Beloved by <span>Executives</span>
+                  Relied on by students striving for success  
+                  <br />  
+                  Trusted by educators, admired by <span>professionals</span>
+
                 </h2>
               </div>
             </div>
