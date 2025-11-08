@@ -5,35 +5,7 @@ const Footer = () => {
   return (
     <div className="footerarea">
       <div className="container">
-        {/* Newsletter Section */}
-        <div className="footerarea__newsletter__wraper">
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" data-aos="fade-up">
-              <div className="footerarea__text">
-                <h3>
-                  Still You Need Our <span>Support</span>?
-                </h3>
-                <p>
-                  Don’t wait — reach out to us. It’s quick & easy.
-                </p>
-              </div>
-            </div>
-            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" data-aos="fade-up">
-              <div className="footerarea__newsletter">
-                <div className="footerarea__newsletter__input">
-                  <form action="#">
-                    <input type="email" placeholder="Enter your email here" />
-                    <div className="footerarea__newsletter__button">
-                      <button type="submit" className="subscribe__btn">
-                        Subscribe Now
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      
 
         {/* Main Footer Content */}
         <div className="footerarea__wrapper footerarea__wrapper__2">

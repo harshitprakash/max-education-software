@@ -7,6 +7,8 @@ import About from './pages/About';
 import Courses from './pages/Courses';
 import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
+import Login from './pages/Auth/Login';
+
 function App() {
   return (
     <Router>
@@ -16,6 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MobileMenu from "./MobileMenu";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const openMobileMenu = () => setMenuOpen(true);
   const closeMobileMenu = () => setMenuOpen(false);
+  const routpath= useLocation();
 
   return (
     <header>
@@ -58,9 +60,12 @@ const Header = () => {
             {/* Sign In - Hidden on Mobile */}
             <div className="col-xl-3 col-lg-3 d-none d-md-block">
               <div className="headerarea__right">
+              {routpath.pathname !== '/login' && (
                 <div className="headerarea__button">
                   <Link to="/login">Login</Link>
                 </div>
+              )}
+               
               </div>
             </div>
 
