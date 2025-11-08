@@ -63,11 +63,11 @@ const Footer = () => {
                 </div>
                 <div className="footerarea__list">
                   <ul>
-                    <li><a href="/courses/ui-ux">UI/UX Design</a></li>
-                    <li><a href="/courses/web-dev">Web Development</a></li>
-                    <li><a href="/courses/business">Business Strategy</a></li>
-                    <li><a href="/courses/software-dev">Software Development</a></li>
-                    <li><a href="/courses/english">Business English</a></li>
+                    <li><a href="#">UI/UX Design</a></li>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Business Strategy</a></li>
+                    <li><a href="#">Software Development</a></li>
+                    <li><a href="#">Business English</a></li>
                   </ul>
                 </div>
               </div>
@@ -95,10 +95,10 @@ const Footer = () => {
             <div className="col-xl-3 col-lg-3 text-end">
               <div className="footerarea__icon footerarea__icon__2">
                 <ul>
-                  <li><a href="//facebook.com/maxeducation" target="_blank"><i className="icofont-facebook"></i></a></li>
-                  <li><a href="//twitter.com/maxeducation" target="_blank"><i className="icofont-twitter"></i></a></li>
-                  <li><a href="//linkedin.com/company/maxeducation" target="_blank"><i className="icofont-linkedin"></i></a></li>
-                  <li><a href="//instagram.com/maxeducation" target="_blank"><i className="icofont-instagram"></i></a></li>
+                  <li><a href="#" target="_blank"><i className="icofont-facebook"></i></a></li>
+                  <li><a href="#" target="_blank"><i className="icofont-twitter"></i></a></li>
+                  <li><a href="#" target="_blank"><i className="icofont-linkedin"></i></a></li>
+                  <li><a href="#" target="_blank"><i className="icofont-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
