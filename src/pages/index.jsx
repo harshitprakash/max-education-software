@@ -211,12 +211,7 @@ const subjects = [
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                loading="lazy"
-                src="img/icon/video.png"
-                alt="Play Video"
-                style={{ width: "70px", height: "70px" }}
-              />
+              <img loading="lazy" src="img/icon/video.png" alt="Play Video"/>
             </a>
           </div>
         </div>
