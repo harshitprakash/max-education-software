@@ -3,7 +3,7 @@ import BreadcrumbArea from "../components/BreadcrumbArea";
 import CourseCard from "../components/cards/CourseCard";
 import CourseListItem from "../components/cards/CourseListItem";
 import courses from "../data/courses.json";
-
+import Mode from "../components/Mode"; 
 const Courses = () => {
   const [sortBy, setSortBy] = useState("new");
   const [searchQuery, setSearchQuery] = useState("");
@@ -109,6 +109,7 @@ const Courses = () => {
 
   return (
     <>
+    <Mode/>
         {/* breadcrumb area (replaced with reusable component) */}
         <BreadcrumbArea
           title="Courses"

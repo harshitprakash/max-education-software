@@ -1,10 +1,10 @@
 import React from 'react';
-
+import Mode from "../../components/Mode";
 const login = ()=>{
 
     return(
-        
-        
+       <> 
+        <Mode/>
              <div className="tab-content tab__content__wrapper mb-5 mt-5" id="myTabContent" data-aos="fade-up">
 
                         <div className="tab-pane fade active show" id="projects__one" role="tabpanel" aria-labelledby="projects__one">
@@ -51,6 +51,7 @@ const login = ()=>{
 
 
                     </div>
+                    </>
     );
 };
 
