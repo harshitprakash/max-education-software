@@ -60,15 +60,16 @@ const Footer = () => {
             <div className="col-xl-4 col-lg-3 col-md-6 col-sm-6" data-aos="fade-up">
               <div className="footerarea__inner footerarea__padding__left">
                 <div className="footerarea__heading">
-                  <h3>Courses</h3>
+                  <h3>Popular Courses</h3>
                 </div>
                 <div className="footerarea__list">
                   <ul>
-                    <li><Link to="/">UI/UX Design</Link></li>
+                    <li><Link to="/">Tally Prime</Link></li>
+                    <li><Link to="/">Basic Computer</Link></li>
                     <li><Link to="/">Web Development</Link></li>
-                    <li><Link to="/">Business Strategy</Link></li>
-                    <li><Link to="/">Software Development</Link></li>
-                    <li><Link to="/">Business English</Link></li>
+                    <li><Link to="/">Graphic Design</Link></li>
+                    <li><Link to="/">Advance Excel</Link></li>
+                    <li><Link to="/">Digital Marketing</Link></li>
                   </ul>
                 </div>
               </div>
@@ -81,9 +82,10 @@ const Footer = () => {
           <div className="row align-items-center">
             <div className="col-xl-3 col-lg-3">
               <div className="copyright__logo">
-                <a href="/">
-                  <img loading="lazy" src="img/logo/logo_2.png" alt="logo" />
-                </a>
+                <Link to="/">
+                  {/* <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" /> */}
+                  <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong>  
+                </Link>
               </div>
             </div>
             <div className="col-xl-6 col-lg-6">

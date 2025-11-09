@@ -190,7 +190,7 @@ const AboutPage = () => {
           <div className="col-xl-12" data-aos="fade-up">
             <div className="section__title text-center">
               <div className="section__title__heading heading__underline">
-                <h2 style={{marginTop:"100px",color:"black"}}>
+                <h2 style={{marginTop:"100px"}}>
                   Relied on by students striving for success  
                   <br />  
                   Trusted by educators, admired by <span>professionals</span>
