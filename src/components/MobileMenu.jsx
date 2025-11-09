@@ -3,37 +3,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
+const MobileMenu = ({ isOpen, onClose }) => {
+  const routePath = useLocation();
 
-const MobileMenu = () => {
-  const closeMenu = () => {
-    document.body.classList.remove("mobile-off-canvas-active");
-  };
-const routePath = useLocation();
   return (
-    <div className="mobile-off-canvas-active">
-      <a className="mobile-aside-close" href="#">
+    <div className={`mobile-off-canvas-active ${isOpen ? "show" : ""}`}>
+      {/* Close button */}
+      <a className="mobile-aside-close" onClick={onClose}>
         <i className="icofont icofont-close-line"></i>
       </a>
 
       <div className="header-mobile-aside-wrap">
-       
-
-        {/* Simple Flat Menu - NO DROPDOWNS */}
         <div className="mobile-menu-wrap">
           <nav>
             <ul className="mobile-menu">
-              <li><Link to="/" >Home</Link></li>
-              <li><Link to="/courses" >Courses</Link></li>
-              <li><Link to="/about" >About</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
-              {routePath.pathname != '/login' &&(
-               <li><Link to="/login">Login</Link></li>
+              <li><Link to="/" onClick={onClose}>Home</Link></li>
+              <li><Link to="/courses" onClick={onClose}>Courses</Link></li>
+              <li><Link to="/about" onClick={onClose}>About</Link></li>
+              <li><Link to="/contact" onClick={onClose}>Contact</Link></li>
+              {routePath.pathname !== '/login' && (
+                <li><Link to="/login" onClick={onClose}>Login</Link></li>
               )}
             </ul>
           </nav>
         </div>
 
-        {/* Social Icons */}
         <div className="mobile-social-wrap">
           <a href="#"><i className="icofont icofont-facebook"></i></a>
           <a href="#"><i className="icofont icofont-twitter"></i></a>
@@ -44,5 +38,6 @@ const routePath = useLocation();
     </div>
   );
 };
+
 
 export default MobileMenu;

@@ -215,6 +215,15 @@ html.is_dark .mobile-menu li a { color: #eee; }
 .mobile-menu li a:hover { background-color: #5F2DED; color: #fff; }
 html.is_dark .mobile-menu li a.active { background-color: #5F2DED; color: #fff; }
 
+/* Make mobile hamburger white in dark mode */
+html.is_dark .mobile-aside-button i {
+  color: #fff;
+}
+html.is_dark .mobile-aside-close i {
+  color: #fff;
+}
+
+
 /* =================== Responsive =================== */
 @media (max-width: 1200px) {
   .tab__content__wrapper h5 { font-size: 19px; }
@@ -252,3 +261,5 @@ html.is_dark .mobile-menu li a.active { background-color: #5F2DED; color: #fff; 
     font-weight:bolder;
 
 }
+
+

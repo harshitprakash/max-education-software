@@ -4,6 +4,7 @@ import Tilt from 'react-parallax-tilt';
 import 'aos/dist/aos.css';
 import Mode from '../components/Mode';
 import FeaturedCourses from "./homePage/FeaturedCourses";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   useEffect(() => {
@@ -184,9 +185,10 @@ const subjects = [
 
           {/* Buttons */}
           <div className="herobannerarea__button__2 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
-            <a className="default__button" href="/courses">
+          <Link to ="/courses" className="default__button">
               View Courses
-            </a>
+          </Link>
+            
             <a className="default__button herobannerarea__button__3" href="#Featured_courses">
               Explore More
             </a>
@@ -295,9 +297,10 @@ const subjects = [
 
                 {/* Optional CTA Button */}
                 <div className="aboutarea__button mt-4">
-                    <a href="/courses" className="default__button">
-                    Explore Courses
-                    </a>
+                    <Link to="/courses" className="default__button">
+                      Explore Courses
+                    </Link>
+
                 </div>
                 </div>
             </div>
@@ -319,9 +322,10 @@ const subjects = [
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6" data-aos="fade-up">
                 <div className="populerarea__button">
-                  <a className="default__button" href="/courses">
-                    All Categories <i className="icofont-long-arrow-right"></i>
-                  </a>
+                  <Link to="/courses" className="default__button">
+                      All Categories <i className="icofont-long-arrow-right"></i>
+                  </Link>
+                 
                 </div>
               </div>
             </div>

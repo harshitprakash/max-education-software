@@ -1,5 +1,6 @@
 // src/components/Footer.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -46,10 +47,10 @@ const Footer = () => {
                 </div>
                 <div className="footerarea__list">
                   <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/courses">Courses</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/courses">Courses</Link></li>
+                    <li><Link to="/contact">Contact Us</Link></li>
                   </ul>
                 </div>
               </div>
@@ -63,11 +64,11 @@ const Footer = () => {
                 </div>
                 <div className="footerarea__list">
                   <ul>
-                    <li><a href="#">UI/UX Design</a></li>
-                    <li><a href="#">Web Development</a></li>
-                    <li><a href="#">Business Strategy</a></li>
-                    <li><a href="#">Software Development</a></li>
-                    <li><a href="#">Business English</a></li>
+                    <li><Link to="/">UI/UX Design</Link></li>
+                    <li><Link to="/">Web Development</Link></li>
+                    <li><Link to="/">Business Strategy</Link></li>
+                    <li><Link to="/">Software Development</Link></li>
+                    <li><Link to="/">Business English</Link></li>
                   </ul>
                 </div>
               </div>
