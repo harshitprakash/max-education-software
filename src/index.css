@@ -190,7 +190,6 @@ html.is_dark h5,
 html.is_dark h3,
 html.is_dark h2,
 html.is_dark span {
-  color: #eee !important;
   background: transparent !important;
 }
 html.is_dark .swiper-slide { background: #17093E !important; }
@@ -261,5 +260,16 @@ html.is_dark .mobile-aside-close i {
     font-weight:bolder;
 
 }
+.copyright__logo span{
+    font-size: 180%;
+    color:crimson;
+    font-weight:bolder;
+}
+html.is_dark .copyright__logo span{
+  color:crimson;
+}
 
-
+html.is_dark .tab__content__wrapper p,
+html.is_dark .tab__content__wrapper h5{
+  color:white;
+}
