@@ -239,3 +239,16 @@ html.is_dark .mobile-menu li a.active { background-color: #5F2DED; color: #fff; 
   .choose-list li { font-size: 12px; line-height: 1.4; }
   .mission-vision .card { padding: 14px 10px; }
 }
+
+
+.headerarea__left__logo span{
+  font-size: 180%;
+    color:crimson;
+    font-weight:bolder;
+}
+.mobile-logo span{
+    font-size: 120%;
+    color:crimson;
+    font-weight:bolder;
+
+}

@@ -21,7 +21,8 @@ const Header = () => {
               <div className="headerarea__left">
                 <div className="headerarea__left__logo">
                   <Link to="/">
-                    <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" />
+                    {/* <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" /> */}
+                     <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong>  
                   </Link>
                 </div>
               </div>
@@ -95,8 +96,9 @@ const Header = () => {
             <div className="col-6">
               <div className="mobile-logo">
                 <Link to="/">
-                  <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" />
-                </Link>
+                    {/* <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" /> */}
+                     <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong> 
+                  </Link>
               </div>
             </div>
             <div className="col-6 text-end">
