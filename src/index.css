@@ -249,10 +249,13 @@ html.is_dark .mobile-aside-close i {
 }
 
 
-.headerarea__left__logo span{
-  font-size: 180%;
+.headerarea__left__logo strong span{
+  font-size: 160%;
     color:crimson;
     font-weight:bolder;
+}
+.headerarea__left__logo strong{
+  color:#5F2DED;
 }
 .mobile-logo span{
     font-size: 120%;
