@@ -27,15 +27,15 @@ const Header = () => {
                         loading="lazy"
                         src="/img/logo/logo_3.png"
                         alt="light logo"
-                        className="mobiles-logo light-logo"
-                        style={{ height: '40px', width: 'auto' }}
+                        className="site-logo light-logo"
+                        style={{ height: '80px', width: 'auto' }}
                       />
                       <img
                         loading="lazy"
                         src="/img/logo/logo.jpg"
                         alt="dark logo"
-                        className="mobiles-logo dark-logo"
-                        style={{ height: '40px', width: 'auto' }}
+                        className="site-logo dark-logo"
+                        style={{ height: '60px', width: 'auto' }}
                       />
                     </div>
                     <strong><span>Max</span>Education</strong>
@@ -84,14 +84,14 @@ const Header = () => {
                       src="/img/logo/logo_3.png"
                       alt="light logo"
                       className="mobiles-logo light-logo"
-                      style={{ height: '36px', width: 'auto' }}
+                      style={{ height: '60px', width: 'auto' }}
                     />
                     <img
                       loading="lazy"
                       src="/img/logo/logo.jpg"
                       alt="dark logo"
                       className="mobiles-logo dark-logo"
-                      style={{ height: '36px', width: 'auto' }}
+                      style={{ height: '60px', width: 'auto' }}
                     />
                   </div>
                   <strong><span>Max</span>Education</strong>

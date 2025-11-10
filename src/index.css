@@ -251,17 +251,21 @@ html.is_dark .mobile-aside-close i {
 
 .headerarea__left__logo strong span{
   font-size: 160%;
-    color:crimson;
-    font-weight:bolder;
+  font-weight:bolder;
 }
 .headerarea__left__logo strong{
-  color:#5F2DED;
+  color:#111;
 }
-.mobile-logo span{
+html.is_dark .headerarea__left__logo strong{
+  color:#eee;
+}
+.mobile-logo strong{
     font-size: 120%;
-    color:crimson;
+    color:#111;
     font-weight:bolder;
-
+}
+html.is_dark .mobile-logo strong{
+  color:#eee;
 }
 .copyright__logo span{
     font-size: 180%;
@@ -297,9 +301,6 @@ html.is_dark .tab__content__wrapper h5{
     max-width: 100px;  /* smaller on mobile */
   }
 }
-
-
-
 
 .mobiles-logo {
   width: 40%;
