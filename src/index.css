@@ -273,3 +273,62 @@ html.is_dark .tab__content__wrapper p,
 html.is_dark .tab__content__wrapper h5{
   color:white;
 }
+
+/* Header LOGO */
+
+.site-logo {
+  width: 40%;
+  max-width: 150px;   /* limits size on large screens */
+  height: auto;       /* keeps aspect ratio */
+  display: block;     /* removes extra inline spacing */
+}
+
+@media (max-width: 768px) {
+  .site-logo {
+    max-width: 120px;  /* smaller on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .site-logo {
+    max-width: 100px;  /* smaller on mobile */
+  }
+}
+
+
+
+
+.mobiles-logo {
+  width: 40%;
+  max-width: 150px;   /* limits size on large screens */
+  height: auto;       /* keeps aspect ratio */
+  display: block;     /* removes extra inline spacing */
+}
+
+@media (max-width: 768px) {
+  .mobiles-logo {
+    max-width: 120px;  /* smaller on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .mobiles-logo {
+    max-width: 80px;  /* smaller on mobile */
+  }
+}
+html.is_dark .light-logo{
+
+display: none;
+
+}
+html:not(.is_dark) .dark-logo {
+  display: none;
+}
+.dark-logo{
+  border-radius: 50%;
+}
+.footer-logo{
+  border-radius: 50%;
+}
+
+

@@ -20,10 +20,21 @@ const Header = () => {
             <div className="col-xl-2 col-lg-2 col-md-6 col-6">
               <div className="headerarea__left">
                 <div className="headerarea__left__logo">
-                  <Link to="/">
-                    {/* <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" /> */}
-                     <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong>  
-                  </Link>
+                 <Link to="/">
+                      <img
+                        loading="lazy"
+                        src="/img/logo/logo_3.png"
+                        alt="logo"
+                        className="mobiles-logo light-logo"
+                      />
+                      <img
+                        loading="lazy"
+                        src="/img/logo/logo.jpg"
+                        alt="logo"
+                        className="mobiles-logo dark-logo"
+                      />
+                    </Link>
+
                 </div>
               </div>
             </div>
@@ -95,10 +106,20 @@ const Header = () => {
           <div className="row align-items-center">
             <div className="col-6">
               <div className="mobile-logo">
-                <Link to="/">
-                    {/* <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" /> */}
-                     <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong> 
-                  </Link>
+                  <Link to="/">
+                      <img
+                        loading="lazy"
+                        src="/img/logo/logo_3.png"
+                        alt="logo"
+                        className="mobiles-logo light-logo"
+                      />
+                      <img
+                        loading="lazy"
+                        src="/img/logo/logo.jpg"
+                        alt="logo"
+                        className="mobiles-logo dark-logo"
+                      />
+                    </Link>
               </div>
             </div>
             <div className="col-6 text-end">

@@ -80,15 +80,21 @@ const Footer = () => {
         {/* Copyright */}
         <div className="footerarea__copyright__wrapper footerarea__copyright__wrapper__2">
           <div className="row align-items-center">
-            <div className="col-xl-3 col-lg-3">
+            <div className="col-xl-3 col-lg-3 col-sm-12 mb-5">
               <div className="copyright__logo">
+              
                 <Link to="/">
-                  {/* <img loading="lazy" src="/img/logo/logo_1.png" alt="logo" /> */}
-                  <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong>  
+                  <img
+                    loading="lazy"
+                    src="/img/logo/logo.jpg"
+                    alt="logo"
+                    className="site-logo footer-logo"
+                  />
+                  {/* <span>Max</span><strong style={{color:"#5F2DED"}}>Education</strong>   */}
                 </Link>
               </div>
             </div>
-            <div className="col-xl-6 col-lg-6">
+            <div className="col-xl-6 col-lg-6 col-sm-12 col-md-12">
               <div className="footerarea__copyright__content footerarea__copyright__content__2 text-center">
                 <p>
                   Copyright © <span>2024</span> by Max Education. All Rights Reserved.
