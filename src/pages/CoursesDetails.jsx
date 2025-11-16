@@ -7,11 +7,11 @@ import coursesData from "../data/coursesdetails.json";
 const CourseDetails = () => {
   const { id } = useParams();
 
-  // Find course in both JSONs
+  // Find course in both files
   const courseBasic = courses.courses.find((c) => c.id === parseInt(id));
-  const courseDetail = coursesData.courses?.find((c) => c.id === parseInt(id));
+  const courseDetail = coursesData.courses.find((c) => c.id === parseInt(id));
 
-  // Merge data: courseDetail overrides courseBasic
+  // Merge data: details override basic, fallback to basic
   const course = { ...courseBasic, ...courseDetail };
 
   const [activeTab, setActiveTab] = useState("projects__one");
@@ -45,18 +45,11 @@ const CourseDetails = () => {
       return (
         <div className="scc__wrap" key={index}>
           <div className="scc__info">
-            <i className="icofont-video-alt"></i>
             <h5>
               <span>Topic :</span> {lesson}
             </h5>
           </div>
-          <div className="scc__meta">
-            <a href="#">
-              <span>
-                <i className="icofont-lock"></i>
-              </span>
-            </a>
-          </div>
+         
         </div>
       );
     }
@@ -125,7 +118,7 @@ const CourseDetails = () => {
 
   return (
     <>
-      {/* BREADCRUMB */}
+      {/* BREADCRUMB & HEADER */}
       <div className="breadcrumbarea breadcrumbarea--2">
         <div className="container">
           <div className="row">
@@ -167,6 +160,18 @@ const CourseDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="shape__icon__2">
+          {[1, 2, 3, 5].map((n) => (
+            <img
+              key={n}
+              loading="lazy"
+              className={`shape__icon__img shape__icon__img__${n}`}
+              src={`/img/herobanner/herobanner__${n}.png`}
+              alt="decor"
+            />
+          ))}
         </div>
       </div>
 
@@ -281,19 +286,19 @@ const CourseDetails = () => {
                   <div className="course__summery__lists mt-4">
                     <ul>
                       <li className="d-flex justify-content-between">
-                        <span>Course:</span>
+                        <span><i className="icofont-book"></i> Course:</span>
                         <strong className="text-dark">{title}</strong>
                       </li>
                       <li className="d-flex justify-content-between">
-                        <span>Category:</span>
+                        <span><i className="icofont-tags"></i> Category:</span>
                         <strong className="text-dark">{category}</strong>
                       </li>
                       <li className="d-flex justify-content-between">
-                        <span>Instructor:</span>
+                        <span><i className="icofont-user-alt-3"></i> Instructor:</span>
                         <strong className="text-dark">{instructorName}</strong>
                       </li>
                       <li className="d-flex justify-content-between">
-                        <span>Duration:</span>
+                        <span><i className="icofont-clock-time"></i> Duration:</span>
                         <strong className="text-dark">{totalduration} months</strong>
                       </li>
                     </ul>
