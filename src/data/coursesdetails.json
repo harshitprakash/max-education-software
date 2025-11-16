@@ -1,0 +1,237 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Tally Prime",
+      "syllabus": [
+        {
+          "section": "Getting Started",
+          "topics": [
+            "Introduction to Tally Prime",
+            "Installation & Setup",
+            "Company Creation"
+          ]
+        },
+        {
+          "section": "Accounting Basics",
+          "topics": [
+            "Ledger & Group Creation",
+            "Voucher Entries",
+            "Bank Reconciliation"
+          ]
+        },
+        {
+          "section": "GST & Taxation",
+          "topics": [
+            "GST Configuration",
+            "GST Invoicing",
+            "GSTR-1 & GSTR-3B"
+          ]
+        },
+        {
+          "section": "Inventory & Payroll",
+          "topics": [
+            "Stock Management",
+            "Payroll Setup",
+            "Salary Processing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Basic Computer",
+      "syllabus": [
+        {
+          "section": "Computer Fundamentals",
+          "topics": [
+            "Parts of Computer",
+            "Turning On/Off",
+            "Desktop & Taskbar"
+          ]
+        },
+        {
+          "section": "MS Paint",
+          "topics": [
+            "Opening Paint",
+            "Drawing Tools",
+            "Colors & Fill",
+            "Saving Image"
+          ]
+        },
+        {
+          "section": "MS Word",
+          "topics": [
+            "Typing Text",
+            "Formatting (Bold, Italic)",
+            "Insert Picture",
+            "Save & Print"
+          ]
+        },
+        {
+          "section": "MS Excel",
+          "topics": [
+            "Enter Data",
+            "Simple Addition (SUM)",
+            "Save File"
+          ]
+        },
+        {
+          "section": "MS PowerPoint",
+          "topics": [
+            "New Slide",
+            "Add Text & Image",
+            "Slide Transitions",
+            "Present Slideshow"
+          ]
+        },
+        {
+          "section": "Basic Internet",
+          "topics": [
+            "Open Chrome",
+            "Google Search",
+            "Bookmark Page",
+            "Safe Browsing"
+          ]
+        },
+        {
+          "section": "Email (Gmail)",
+          "topics": [
+            "Create Account",
+            "Send Email",
+            "Attach File",
+            "Reply"
+          ]
+        },
+        {
+          "section": "Cyber Safety",
+          "topics": [
+            "Strong Passwords",
+            "Avoid Phishing",
+            "Antivirus Basics"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Web Development",
+      "syllabus": [
+        {
+          "section": "HTML",
+          "topics": [
+            "Tags & Structure",
+            "Headings & Paragraphs",
+            "Links & Images"
+          ]
+        },
+        {
+          "section": "CSS",
+          "topics": [
+            "Colors & Fonts",
+            "Box Model",
+            "Flexbox & Grid"
+          ]
+        },
+        {
+          "section": "JavaScript",
+          "topics": [
+            "Variables & Loops",
+            "Functions",
+            "DOM Events"
+          ]
+        },
+        {
+          "section": "React",
+          "topics": [
+            "Components & Props",
+            "useState & useEffect",
+            "Routing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Graphic Design",
+      "syllabus": [
+        {
+          "section": "Photoshop",
+          "topics": [
+            "Layers & Masks",
+            "Photo Editing",
+            "Social Media Posts"
+          ]
+        },
+        {
+          "section": "Illustrator",
+          "topics": [
+            "Vector Tools",
+            "Logo Design",
+            "Business Cards"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Advance Excel",
+      "syllabus": [
+        {
+          "section": "Formulas",
+          "topics": [
+            "VLOOKUP",
+            "INDEX-MATCH",
+            "SUMIFS"
+          ]
+        },
+        {
+          "section": "Pivot & Charts",
+          "topics": [
+            "Pivot Tables",
+            "Slicers",
+            "Interactive Charts"
+          ]
+        },
+        {
+          "section": "VBA",
+          "topics": [
+            "Record Macro",
+            "Write VBA Code",
+            "Automate Reports"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Digital Marketing",
+      "syllabus": [
+        {
+          "section": "SEO",
+          "topics": [
+            "Keyword Research",
+            "On-Page SEO",
+            "Backlinks"
+          ]
+        },
+        {
+          "section": "Google Ads",
+          "topics": [
+            "Search Campaigns",
+            "Display Ads",
+            "Budget & Bidding"
+          ]
+        },
+        {
+          "section": "Social Media",
+          "topics": [
+            "Facebook Ads",
+            "Instagram Growth",
+            "Content Calendar"
+          ]
+        }
+      ]
+    }
+  ]
+}

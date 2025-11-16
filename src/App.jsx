@@ -1,5 +1,5 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/index';
@@ -8,6 +8,7 @@ import Courses from './pages/Courses';
 import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
 import Login from './pages/Auth/Login';
+import CourseDetails from './pages/CoursesDetails';
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/coursedetails/:id" element={<CourseDetails />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />}/>
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

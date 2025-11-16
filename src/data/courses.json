@@ -3,7 +3,7 @@
   "courses": [
     {
       "id": 1,
-      "img": "img/grid/grid_1.png",
+      "img": "/img/grid/grid_1.png",
       "courseLink": "Tally Prime",
       "category": "Accounts",
       "badgeClass": "",
@@ -11,11 +11,13 @@
       "discription": "Master accounting with Tally Prime, GST, inventory, payroll, and BUSY software",
       "title": "Tally Prime",
       "instructorLink": "instructor-details.html",
-      "instructorName": "Mirnsdo .H"
+      "instructorName": "Mirnsdo .H",
+      "price": "₹1,500",
+      "totalduration": 4
     },
     {
       "id": 2,
-      "img": "img/grid/grid_2.png",
+      "img": "/img/grid/grid_2.png",
       "courseLink": "Basic Computer",
       "category": "Computer subjects",
       "badgeClass": "blue__color",
@@ -23,11 +25,13 @@
       "discription": "Learn essential computer skills including Office tools, Internet, Cyber Safety, and AI basics",
       "title": "Basic Computer",
       "instructorLink": "instructor-details.html",
-      "instructorName": "Rinis Jhon"
+      "instructorName": "Rinis Jhon",
+      "price": "₹1,000",
+      "totalduration": 3
     },
     {
       "id": 3,
-      "img": "img/grid/grid_3.png",
+      "img": "/img/grid/grid_3.png",
       "courseLink": "Web Development",
       "category": "Software",
       "badgeClass": "pink__color",
@@ -35,11 +39,13 @@
       "discription": "Full-stack development: from zero to deploy is a field that deals with the development of full-stack applications. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
       "title": "Web Development",
       "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Jhon"
+      "instructorName": "Micle Jhon",
+      "price": "₹8,999",
+      "totalduration": 6
     },
     {
       "id": 4,
-      "img": "img/grid/grid_4.png",
+      "img": "/img/grid/grid_4.png",
       "courseLink": "Graphic Design",
       "category": "Ui & UX Design",
       "badgeClass": "green__color",
@@ -47,11 +53,13 @@
       "discription": "UI/UX design: research to prototype is a field that deals with the design of user interfaces and user experiences. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
       "title": "Graphic Design",
       "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Robin"
+      "instructorName": "Micle Robin",
+      "price": "₹5,999",
+      "totalduration": 5
     },
     {
       "id": 5,
-      "img": "img/grid/grid_5.png",
+      "img": "/img/grid/grid_5.png",
       "courseLink": "Advance Excel",
       "category": "Data & Tech",
       "badgeClass": "orange__color",
@@ -59,11 +67,13 @@
       "discription": "Advanced Excel with MIS Syllabus.",
       "title": "Advance Excel",
       "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Robin"
+      "instructorName": "Micle Robin",
+      "price": "₹2,499",
+      "totalduration": 3
     },
     {
       "id": 6,
-      "img": "img/grid/grid_6.png",
+      "img": "/img/grid/grid_6.png",
       "courseLink": "course-details.html",
       "category": "Marketing",
       "badgeClass": "yellow__color",
@@ -71,7 +81,9 @@
       "discription": "Learn the essentials of digital marketing including SEO, SEM, SMM, content, email marketing, and web analytics. Perfect for aspiring marketers.",
       "title": "Digital Marketing",
       "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Robin"
+      "instructorName": "Micle Robin",
+      "price": "₹6,499",
+      "totalduration": 5
     }
   ]
 }
