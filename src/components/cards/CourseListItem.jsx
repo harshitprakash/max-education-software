@@ -6,7 +6,7 @@ const CourseListItem = ({
   category,
   badgeClass = "",
   heartLink = "#",
-  discription,
+  description,
   title,
 }) => {
 
@@ -32,7 +32,7 @@ const CourseListItem = ({
         </div>
 
         <div className="gridarea__price">
-          <p className="justitfy-center-p">{discription.slice(0, 200)}...</p>
+          <p className="justitfy-center-p">{description.slice(0, 200)}...</p>
         </div>
 
         <div className="gridarea__bottom">

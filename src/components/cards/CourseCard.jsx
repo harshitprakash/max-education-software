@@ -8,7 +8,7 @@ const CourseCard = ({
   category,
   badgeClass = "",
   heartLink = "#",
-  discription,
+  description,
   title,
   instructorLink = "#",
 }) => {
@@ -45,7 +45,7 @@ const CourseCard = ({
 
           <div className="gridarea__list">
             <p className="justitfy-center-p">
-              {discription?.slice(0, 120)}...
+              {description?.slice(0, 120)}...
             </p>
           </div>
 

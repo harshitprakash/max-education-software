@@ -223,7 +223,7 @@ const Courses = () => {
                                       courseLink={c.courseLink}
                                       category={c.category}
                                       badgeClass={c.badgeClass}
-                                      discription={c.discription}
+                                      description={c.description}
                                       title={c.title}
                                       instructorLink={c.instructorLink}
                                       heartLink={c.heartLink}
@@ -244,7 +244,7 @@ const Courses = () => {
                                     category={c.category}
                                     badgeClass={c.badgeClass}
                                     heartLink={c.heartLink}
-                                    discription={c.discription}
+                                    description={c.description}
                                     title={c.title}
                                   />
                                 ))}
