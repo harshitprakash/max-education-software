@@ -1,235 +1,285 @@
 {
+  "count": 12,
   "courses": [
     {
       "id": 1,
-      "title": "Tally Prime",
+      "img": "img/basic course.jpg",
+      "courseLink": "course-details.html",
+      "category": "Basic Computer",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Basic Computer Course is thoughtfully designed for complete beginners who want to build a strong foundation in digital skills...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "monthly": 1200,
+        "package": 8000
+      },
       "syllabus": [
         {
-          "section": "Getting Started",
-          "topics": [
-            "Introduction to Tally Prime",
-            "Installation & Setup",
-            "Company Creation"
-          ]
+          "section": "Computer Fundamentals",
+          "topics": ["Parts of Computer", "Turning On/Off", "Desktop & Taskbar"]
         },
         {
-          "section": "Accounting Basics",
-          "topics": [
-            "Ledger & Group Creation",
-            "Voucher Entries",
-            "Bank Reconciliation"
-          ]
+          "section": "MS Paint",
+          "topics": ["Opening Paint", "Drawing Tools", "Colors & Fill", "Saving Image"]
         },
         {
-          "section": "GST & Taxation",
-          "topics": [
-            "GST Configuration",
-            "GST Invoicing",
-            "GSTR-1 & GSTR-3B"
-          ]
+          "section": "MS Word",
+          "topics": ["Typing Text", "Formatting (Bold, Italic)", "Insert Picture", "Save & Print"]
         },
         {
-          "section": "Inventory & Payroll",
-          "topics": [
-            "Stock Management",
-            "Payroll Setup",
-            "Salary Processing"
-          ]
+          "section": "MS Excel",
+          "topics": ["Enter Data", "Simple Addition (SUM)", "Save File"]
+        },
+        {
+          "section": "MS PowerPoint",
+          "topics": ["New Slide", "Add Text & Image", "Slide Transitions", "Present Slideshow"]
+        },
+        {
+          "section": "Basic Internet",
+          "topics": ["Open Chrome", "Google Search", "Bookmark Page", "Safe Browsing"]
+        },
+        {
+          "section": "Email (Gmail)",
+          "topics": ["Create Account", "Send Email", "Attach File", "Reply"]
+        },
+        {
+          "section": "Cyber Safety",
+          "topics": ["Strong Passwords", "Avoid Phishing", "Antivirus Basics"]
         }
       ]
     },
     {
       "id": 2,
-      "title": "Basic Computer",
+      "img": "img/tally.jpg",
+      "courseLink": "course-details.html",
+      "category": "Accounting & Finance",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Tally Prime Course is designed for students, professionals, and beginners who want to build strong accounting skills with practical knowledge...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Divya Kumari",
+      "fees": {
+        "monthly": 2000,
+        "package": 15000
+      },
       "syllabus": [
         {
-          "section": "Computer Fundamentals",
-          "topics": [
-            "Parts of Computer",
-            "Turning On/Off",
-            "Desktop & Taskbar"
-          ]
+          "section": "Getting Started",
+          "topics": ["Introduction to Tally Prime", "Installation & Setup", "Company Creation"]
         },
         {
-          "section": "MS Paint",
-          "topics": [
-            "Opening Paint",
-            "Drawing Tools",
-            "Colors & Fill",
-            "Saving Image"
-          ]
+          "section": "Accounting Basics",
+          "topics": ["Ledger & Group Creation", "Voucher Entries", "Bank Reconciliation"]
         },
         {
-          "section": "MS Word",
-          "topics": [
-            "Typing Text",
-            "Formatting (Bold, Italic)",
-            "Insert Picture",
-            "Save & Print"
-          ]
+          "section": "GST & Taxation",
+          "topics": ["GST Configuration", "GST Invoicing", "GSTR-1 & GSTR-3B"]
         },
         {
-          "section": "MS Excel",
-          "topics": [
-            "Enter Data",
-            "Simple Addition (SUM)",
-            "Save File"
-          ]
-        },
-        {
-          "section": "MS PowerPoint",
-          "topics": [
-            "New Slide",
-            "Add Text & Image",
-            "Slide Transitions",
-            "Present Slideshow"
-          ]
-        },
-        {
-          "section": "Basic Internet",
-          "topics": [
-            "Open Chrome",
-            "Google Search",
-            "Bookmark Page",
-            "Safe Browsing"
-          ]
-        },
-        {
-          "section": "Email (Gmail)",
-          "topics": [
-            "Create Account",
-            "Send Email",
-            "Attach File",
-            "Reply"
-          ]
-        },
-        {
-          "section": "Cyber Safety",
-          "topics": [
-            "Strong Passwords",
-            "Avoid Phishing",
-            "Antivirus Basics"
-          ]
+          "section": "Inventory & Payroll",
+          "topics": ["Stock Management", "Payroll Setup", "Salary Processing"]
         }
       ]
     },
     {
       "id": 3,
-      "title": "Web Development",
+      "img": "img/DTP.jpg",
+      "courseLink": "course-details.html",
+      "category": "Design & Creativity",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This DTP (Desktop Publishing) Course is designed for creative learners who want to master professional design and publishing tools...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 9000
+      },
       "syllabus": [
         {
-          "section": "HTML",
-          "topics": [
-            "Tags & Structure",
-            "Headings & Paragraphs",
-            "Links & Images"
-          ]
+          "section": "Graphic Design Basics",
+          "topics": ["Introduction to Design", "Tools Overview", "Design Principles"]
         },
         {
-          "section": "CSS",
-          "topics": [
-            "Colors & Fonts",
-            "Box Model",
-            "Flexbox & Grid"
-          ]
-        },
-        {
-          "section": "JavaScript",
-          "topics": [
-            "Variables & Loops",
-            "Functions",
-            "DOM Events"
-          ]
-        },
-        {
-          "section": "React",
-          "topics": [
-            "Components & Props",
-            "useState & useEffect",
-            "Routing"
-          ]
+          "section": "Desktop Publishing",
+          "topics": ["Page Layout", "Typography", "Publishing Tools"]
         }
       ]
     },
     {
       "id": 4,
-      "title": "Graphic Design",
+      "img": "img/advance excel.jpg",
+      "courseLink": "course-details.html",
+      "category": "Data & Analytics",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Advanced Excel Course is designed for learners who want to upgrade their data-handling and analytical skills...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 8000
+      },
       "syllabus": [
         {
-          "section": "Photoshop",
-          "topics": [
-            "Layers & Masks",
-            "Photo Editing",
-            "Social Media Posts"
-          ]
+          "section": "Formulas",
+          "topics": ["VLOOKUP", "INDEX-MATCH", "SUMIFS"]
         },
         {
-          "section": "Illustrator",
-          "topics": [
-            "Vector Tools",
-            "Logo Design",
-            "Business Cards"
-          ]
+          "section": "Pivot & Charts",
+          "topics": ["Pivot Tables", "Slicers", "Interactive Charts"]
+        },
+        {
+          "section": "VBA",
+          "topics": ["Record Macro", "Write VBA Code", "Automate Reports"]
         }
       ]
     },
     {
       "id": 5,
-      "title": "Advance Excel",
+      "img": "img/web development.jpg",
+      "courseLink": "course-details.html",
+      "category": "Web Development",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Web Development Course is designed for students and beginners who want to learn how modern websites and web applications are built...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 15000
+      },
       "syllabus": [
         {
-          "section": "Formulas",
-          "topics": [
-            "VLOOKUP",
-            "INDEX-MATCH",
-            "SUMIFS"
-          ]
+          "section": "HTML",
+          "topics": ["Tags & Structure", "Headings & Paragraphs", "Links & Images"]
         },
         {
-          "section": "Pivot & Charts",
-          "topics": [
-            "Pivot Tables",
-            "Slicers",
-            "Interactive Charts"
-          ]
+          "section": "CSS",
+          "topics": ["Colors & Fonts", "Box Model", "Flexbox & Grid"]
         },
         {
-          "section": "VBA",
-          "topics": [
-            "Record Macro",
-            "Write VBA Code",
-            "Automate Reports"
-          ]
+          "section": "JavaScript",
+          "topics": ["Variables & Loops", "Functions", "DOM Events"]
+        },
+        {
+          "section": "React",
+          "topics": ["Components & Props", "useState & useEffect", "Routing"]
         }
       ]
     },
     {
       "id": 6,
-      "title": "Digital Marketing",
+      "img": "img/digital marketng.jpg",
+      "courseLink": "course-details.html",
+      "category": "Digital Marketing",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Digital Marketing Course is designed for beginners and professionals who want to master skills required to grow a business online...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 15000
+      },
       "syllabus": [
         {
           "section": "SEO",
-          "topics": [
-            "Keyword Research",
-            "On-Page SEO",
-            "Backlinks"
-          ]
+          "topics": ["Keyword Research", "On-Page SEO", "Backlinks"]
         },
         {
           "section": "Google Ads",
-          "topics": [
-            "Search Campaigns",
-            "Display Ads",
-            "Budget & Bidding"
-          ]
+          "topics": ["Search Campaigns", "Display Ads", "Budget & Bidding"]
         },
         {
           "section": "Social Media",
-          "topics": [
-            "Facebook Ads",
-            "Instagram Growth",
-            "Content Calendar"
-          ]
+          "topics": ["Facebook Ads", "Instagram Growth", "Content Calendar"]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "img": "img/stock market.jpg",
+      "courseLink": "course-details.html",
+      "category": "Stock Market",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Stock Market Course is designed for beginners and aspiring traders who want to understand how the financial markets work...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 18000
+      },
+      "syllabus": [
+        {
+          "section": "Stock Market Basics",
+          "topics": ["Introduction to Stock Market", "Stock Exchanges", "Market Participants"]
+        },
+        {
+          "section": "Investing Strategies",
+          "topics": ["Long-term Investing", "Short-term Trading", "Technical Analysis"]
+        },
+        {
+          "section": "Risk Management",
+          "topics": ["Portfolio Diversification", "Stop Losses", "Position Sizing"]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "img": "img/ccc.jpg",
+      "courseLink": "course-details.html",
+      "category": "Computer Fundamentals",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This CCC (Course on Computer Concepts) program is designed for beginners who want to develop essential digital skills...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 8000
+      },
+      "syllabus": [
+        {
+          "section": "Computer Basics",
+          "topics": ["Hardware & Software", "Operating Systems", "Basic Troubleshooting"]
+        },
+        {
+          "section": "Internet Basics",
+          "topics": ["Web Browsing", "Email Setup", "Search Engines"]
+        },
+        {
+          "section": "Office Tools",
+          "topics": ["MS Word Basics", "MS Excel Basics", "MS PowerPoint Basics"]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "img": "img/logo.python.jpg",
+      "courseLink": "course-details.html",
+      "category": "Programming & Development",
+      "badgeClass": "",
+      "heartLink": "#",
+      "description": "This Python Programming Course is designed for students and beginners who want to learn one of the most powerful programming languages...",
+      "instructorLink": "instructor-details.html",
+      "instructorName": "Max Education Experts",
+      "fees": {
+        "package": 9000
+      },
+      "syllabus": [
+        {
+          "section": "Python Basics",
+          "topics": ["Syntax & Variables", "Data Types", "Operators"]
+        },
+        {
+          "section": "Control Flow",
+          "topics": ["Conditionals", "Loops", "Functions"]
+        },
+        {
+          "section": "Data Structures",
+          "topics": ["Lists", "Tuples", "Dictionaries", "Sets"]
+        },
+        {
+          "section": "Modules & Libraries",
+          "topics": ["Standard Library", "Installing Packages", "Popular Libraries"]
         }
       ]
     }

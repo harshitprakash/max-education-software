@@ -31,7 +31,7 @@ const CourseDetails = () => {
     title,
     category,
     img,
-    discription,
+    description,
     instructorName,
     price,
     badgeClass,
@@ -218,7 +218,7 @@ const CourseDetails = () => {
                         <h5>Course Description</h5>
                       </div>
                       <div className="experence__description">
-                        <p className="description__1">{discription}</p>
+                        <p className="description__1">{description}</p>
                       </div>
                     </div>
 

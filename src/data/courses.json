@@ -1,89 +1,115 @@
 {
-  "count": 12,
+  "count": 9,
   "courses": [
     {
       "id": 1,
-      "img": "/img/grid/grid_1.png",
-      "courseLink": "Tally Prime",
-      "category": "Accounts",
-      "badgeClass": "",
-      "heartLink": "#",
-      "discription": "Master accounting with Tally Prime, GST, inventory, payroll, and BUSY software",
-      "title": "Tally Prime",
-      "instructorLink": "instructor-details.html",
-      "instructorName": "Mirnsdo .H",
-      "price": "₹1,500",
-      "totalduration": 4
+      "img": "/img/courses/basic_course.jpg",
+      "title": "Basic Computer Course",
+      "category": "Basic Computer",
+      "description": "This Basic Computer Course is thoughtfully designed for complete beginners who want to build a strong foundation in digital skills. Throughout the course, you will learn how to operate a computer confidently, understand essential computer components, and perform daily tasks without any confusion. You will explore MS Word, Excel, and PowerPoint in detail, gaining the ability to create documents, manage data, and design presentations professionally. The course also covers typing practice, file handling, internet usage, online safety, email management, and many practical digital activities that are required in modern jobs and education. By the end of this course, you will feel confident using a computer independently and will be well-prepared for advanced computer and programming courses.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 3,
+      "fees": {
+        "monthly": 1200,
+        "package": 8000
+      }
     },
     {
       "id": 2,
-      "img": "/img/grid/grid_2.png",
-      "courseLink": "Basic Computer",
-      "category": "Computer subjects",
-      "badgeClass": "blue__color",
-      "heartLink": "#",
-      "discription": "Learn essential computer skills including Office tools, Internet, Cyber Safety, and AI basics",
-      "title": "Basic Computer",
-      "instructorLink": "instructor-details.html",
-      "instructorName": "Rinis Jhon",
-      "price": "₹1,000",
-      "totalduration": 3
+      "img": "/img/courses/tally.jpg",
+      "title": "Tally Prime Course",
+      "category": "Accounting & Finance",
+      "description": "This Tally Prime Course is designed for students, professionals, and beginners who want to build strong accounting skills with practical, real-world knowledge. Throughout this course, you will learn how to manage accounts, create ledgers, record vouchers, handle GST, generate reports, and maintain business financials with complete accuracy. You will explore essential features like inventory management, bill-by-bill adjustments, balance sheets, profit & loss statements, and banking processes in Tally. The course also covers GST returns, tax invoices, credit notes, and all major accounting operations used in companies today. By the end of this course, you will be able to confidently manage business accounts and handle financial tasks professionally.",
+      "instructorName": "Divya Kumari",
+      "totalduration": 4,
+      "fees": {
+        "monthly": 2000,
+        "package": 15000
+      }
     },
     {
       "id": 3,
-      "img": "/img/grid/grid_3.png",
-      "courseLink": "Web Development",
-      "category": "Software",
-      "badgeClass": "pink__color",
-      "heartLink": "#",
-      "discription": "Full-stack development: from zero to deploy is a field that deals with the development of full-stack applications. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
-      "title": "Web Development",
-      "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Jhon",
-      "price": "₹8,999",
-      "totalduration": 6
+      "img": "/img/courses/DTP.jpg",
+      "title": "Professional DTP Course",
+      "category": "Design & Creativity",
+      "description": "This DTP (Desktop Publishing) Course is designed for creative learners who want to master professional design and publishing tools used in the digital and print media industry. Throughout the course, you will learn to work with essential software like Photoshop, CorelDRAW, Illustrator, and InDesign for creating stunning posters, banners, brochures, business cards, logos, magazines, and layouts. You will understand color theory, typography, image editing, page design, and print setup in a practical, easy-to-follow way. The course focuses on hands-on projects that help you build confidence and develop a strong design portfolio.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 5,
+      "fees": {
+        "package": 9000
+      }
     },
     {
       "id": 4,
-      "img": "/img/grid/grid_4.png",
-      "courseLink": "Graphic Design",
-      "category": "Ui & UX Design",
-      "badgeClass": "green__color",
-      "heartLink": "#",
-      "discription": "UI/UX design: research to prototype is a field that deals with the design of user interfaces and user experiences. It is a critical component of modern data infrastructure, enabling businesses to gain insights from data as it is generated, rather than after the fact.",
-      "title": "Graphic Design",
-      "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Robin",
-      "price": "₹5,999",
-      "totalduration": 5
+      "img": "/img/courses/advance excel.jpg",
+      "title": "Advanced Excel Course",
+      "category": "Data & Analytics",
+      "description": "This Advanced Excel Course is designed for learners who want to upgrade their data-handling and analytical skills for professional growth. Throughout the course, you will dive deep into powerful Excel tools such as advanced formulas, conditional functions, data validation, Pivot Tables, VLOOKUP and XLOOKUP, dashboards, charts, automation features, and data cleaning techniques. You will also learn how to work with large datasets, perform complex calculations, and create interactive business reports.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 3,
+      "fees": {
+        "package": 8000
+      }
     },
     {
       "id": 5,
-      "img": "/img/grid/grid_5.png",
-      "courseLink": "Advance Excel",
-      "category": "Data & Tech",
-      "badgeClass": "orange__color",
-      "heartLink": "#",
-      "discription": "Advanced Excel with MIS Syllabus.",
-      "title": "Advance Excel",
-      "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Robin",
-      "price": "₹2,499",
-      "totalduration": 3
+      "img": "/img/courses/web development.jpg",
+      "title": "Web Development Course",
+      "category": "Web Development",
+      "description": "This Web Development Course is designed for students and beginners who want to learn how modern websites and web applications are built. Throughout the course, you will learn the complete front-end development process, starting from HTML for structure, CSS for styling, and JavaScript for interactive functionality. You will also explore responsive design, layout techniques, animations, and best coding practices used in real-world projects.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 6,
+      "fees": {
+        "package": 15000
+      }
     },
     {
       "id": 6,
-      "img": "/img/grid/grid_6.png",
-      "courseLink": "course-details.html",
-      "category": "Marketing",
-      "badgeClass": "yellow__color",
-      "heartLink": "#",
-      "discription": "Learn the essentials of digital marketing including SEO, SEM, SMM, content, email marketing, and web analytics. Perfect for aspiring marketers.",
-      "title": "Digital Marketing",
-      "instructorLink": "instructor-details.html",
-      "instructorName": "Micle Robin",
-      "price": "₹6,499",
-      "totalduration": 5
+      "img": "/img/courses/digital marketng.jpg",
+      "title": "Digital Marketing Course",
+      "category": "Digital Marketing",
+      "description": "This Digital Marketing Course is designed for beginners and professionals who want to master the skills required to grow a business online. Throughout the course, you will learn essential digital marketing concepts including SEO, social media marketing, Google Ads, Facebook Ads, content marketing, email marketing, website optimization, analytics, and branding strategies.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 5,
+      "fees": {
+        "package": 15000
+      }
+    },
+    {
+      "id": 7,
+      "img": "/img/courses/stock market.jpg",
+      "title": "Stock Market Course",
+      "category": "Stock Market",
+      "description": "This Stock Market Course is designed for beginners and aspiring traders who want to understand how the financial markets work and how to invest smartly. Throughout the course, you will learn the fundamentals of the stock market, including shares, indices, brokers, demat accounts, and trading platforms. You will explore essential concepts like technical analysis, chart reading, candlestick patterns, market trends, risk management, and long-term investing strategies.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 5,
+      "fees": {
+        "package": 18000
+      }
+    },
+    {
+      "id": 8,
+      "img": "/img/courses/ccc.jpg",
+      "title": "CCC Computer Course",
+      "category": "Computer Fundamentals",
+      "description": "This CCC (Course on Computer Concepts) program is designed for beginners who want to develop essential digital skills required in today’s technology-driven world. Throughout the course, you will learn the fundamentals of computers, operating systems, MS Office tools, typing, file management, email handling, and basic internet usage.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 3,
+      "fees": {
+        "package": 8000
+      }
+    },
+    {
+      "id": 9,
+      "img": "/img/courses/logo.python.jpg",
+      "title": "Python Programming Course",
+      "category": "Programming & Development",
+      "description": "This Python Programming Course is designed for students and beginners who want to learn one of the most powerful and beginner-friendly programming languages used in the tech industry. Throughout the course, you will learn the fundamentals of Python, including variables, data types, loops, conditions, functions, lists, dictionaries, and object-oriented programming.",
+      "instructorName": "Max Education Experts",
+      "totalduration": 6,
+      "fees": {
+        "package": 9000
+      }
     }
   ]
 }

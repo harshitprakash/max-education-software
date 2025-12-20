@@ -9,6 +9,11 @@ import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
 import Login from './pages/Auth/Login';
 import CourseDetails from './pages/CoursesDetails';
+import Profile from './pages/profile/Profile';
+import Dashboard from './pages/profile/Dashboard';
+// import EnrolledCourses from './pages/profile/EnrolledCourses';
+import MyCourses from './pages/profile/EnrolledCourses';
+import FeeSection from './pages/profile/FeeSection';
 
 function App() {
   return (
@@ -16,12 +21,16 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/coursedetails/:id" element={<CourseDetails />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />}/>
+        <Route path="/courses" element={<Courses />}/>
+        <Route path="/coursedetails/:id" element={<CourseDetails />}/>
+        <Route path="/contact" element={<Contact />}/>
+        <Route path="/login" element={<Login />}/>
         <Route path="*" element={<NotFound />} />
+        <Route path="/profile" element={<Profile />}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/enrolledCourses" element={<MyCourses/>}/>
+        <Route path="/feeSection" element={<FeeSection/>}/>
       </Routes>
       <Footer />
     </Router>

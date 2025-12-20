@@ -21,6 +21,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
               <li><Link to="/courses" onClick={onClose}>Courses</Link></li>
               <li><Link to="/about" onClick={onClose}>About</Link></li>
               <li><Link to="/contact" onClick={onClose}>Contact</Link></li>
+              <li><Link to="/profile" onClick={onClose}>View Profile</Link></li>
               {routePath.pathname !== '/login' && (
                 <li><Link to="/login" onClick={onClose}>Login</Link></li>
               )}
