@@ -1,528 +1,419 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import ProfileHeader from "./ProfileHeader";
+import { studentService } from "../../services/application/studentService";
+import { toast } from "react-toastify";
+
 const MyCourses = () => {
   const [key, setKey] = useState("enrolled");
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Format date to display format
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  // Format amount to currency
+  const formatAmount = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  // Format batch time
+  const formatBatchTime = (batch) => {
+    if (!batch || !batch.startTime || !batch.endTime) return "";
+    return `${batch.startTime} - ${batch.endTime}`;
+  };
+
+  // Fetch courses data
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const data = await studentService.getCourses();
+        setCourses(Array.isArray(data) ? data : []);
+      } catch (err) {
+        setError(err.message || "Failed to load courses");
+        toast.error(err.message || "Failed to load courses");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  // Filter courses based on selected tab
+  const getFilteredCourses = () => {
+    if (key === "enrolled") {
+      return courses; // Show all enrolled courses
+    } else if (key === "active") {
+      return courses.filter((course) => course.status === "Active");
+    } else if (key === "completed") {
+      return courses.filter((course) => course.status === "Completed");
+    }
+    return [];
+  };
+
+  const filteredCourses = getFilteredCourses();
+
+  // Render course card
+  const renderCourseCard = (course) => {
+    const isCompleted = course.status === "Completed";
+    const progressWidth = isCompleted ? 100 : course.progress || 0;
+    const discount = course.discount || 0;
+    const finalPrice = course.price - discount;
+    const hasDiscount = discount > 0;
+    const courseImage = course.courseModules && course.courseModules.length > 0 
+      ? course.courseModules[0].imageUrl 
+      : "/img/grid/grid_1.png";
+
+    return (
+      <div key={course.enrollmentId} className="col-xl-4 col-lg-6 col-md-6 col-12 mb-4">
+        <div className="gridarea__wraper">
+          <div className="gridarea__img">
+            <button
+              type="button"
+              className="border-0 bg-transparent p-0 w-100"
+              onClick={() => {
+                navigate(`/coursedetails/${course.courseId}`);
+              }}
+            >
+              <img
+                loading="lazy"
+                src={courseImage}
+                alt={course.courseName}
+                onError={(e) => {
+                  e.target.src = "/img/grid/grid_1.png";
+                }}
+              />
+            </button>
+            <div className="gridarea__small__button">
+              <div className="grid__badge">{course.courseCode || "Course"}</div>
+            </div>
+          </div>
+          <div className="gridarea__content">
+            <div className="gridarea__list">
+              <ul>
+                {course.batches && course.batches.length > 0 && (
+                  <li>
+                    <i className="icofont-clock-time"></i>{" "}
+                    {formatBatchTime(course.batches[0])}
+                    {course.batches.length > 1 && ` (+${course.batches.length - 1} more)`}
+                  </li>
+                )}
+                <li>
+                  <i className="icofont-calendar"></i> Enrolled:{" "}
+                  {formatDate(course.enrollmentDate)}
+                </li>
+                {course.startDate && (
+                  <li>
+                    <i className="icofont-calendar"></i> Start:{" "}
+                    {formatDate(course.startDate)}
+                  </li>
+                )}
+                {course.completionDate && (
+                  <li>
+                    <i className="icofont-check-circled"></i> Completed:{" "}
+                    {formatDate(course.completionDate)}
+                  </li>
+                )}
+                {course.courseModules && course.courseModules.length > 0 && (
+                  <li>
+                    <i className="icofont-book-alt"></i> {course.courseModules.length} Module{course.courseModules.length !== 1 ? 's' : ''}
+                  </li>
+                )}
+              </ul>
+            </div>
+            <div className="gridarea__heading">
+              <h3>
+                <button
+                  type="button"
+                  className="border-0 bg-transparent p-0 text-start text-decoration-none"
+                  onClick={() => {
+                    navigate(`/coursedetails/${course.courseId}`);
+                  }}
+                  title={course.courseDescription || course.courseName}
+                >
+                  {course.courseName}
+                </button>
+              </h3>
+              {course.courseDescription && (
+                <p className="text-muted small mt-2" style={{
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {course.courseDescription.replace(/<[^>]*>/g, '').substring(0, 100)}...
+                </p>
+              )}
+            </div>
+            <div className="gridarea__price">
+              {hasDiscount ? (
+                <>
+                  {formatAmount(finalPrice)}{" "}
+                  <del>{formatAmount(course.price)}</del>
+                  <span className="text-success ms-2">
+                    <small>(Save {formatAmount(discount)})</small>
+                  </span>
+                </>
+              ) : (
+                formatAmount(course.price)
+              )}
+              {course.pricingType && (
+                <span className="ms-2">
+                  <small className="badge bg-secondary">({course.pricingType})</small>
+                </span>
+              )}
+            </div>
+            <div className="gridarea__bottom">
+              <div className="d-flex justify-content-between align-items-center w-100 flex-wrap gap-2">
+                <div>
+                  <span className={`badge ${
+                    course.status === "Active" ? "bg-success" :
+                    course.status === "Completed" ? "bg-primary" :
+                    "bg-secondary"
+                  } me-2`}>
+                    {course.status}
+                  </span>
+                  {course.paymentStatus && (
+                    <span
+                      className={`badge ${
+                        course.paymentStatus === "Paid"
+                          ? "bg-success"
+                          : course.paymentStatus === "Pending"
+                          ? "bg-warning"
+                          : "bg-danger"
+                      }`}
+                    >
+                      {course.paymentStatus}
+                    </span>
+                  )}
+                  {course.grade && (
+                    <span className="badge bg-info ms-2">
+                      Grade: {course.grade}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            {/* Batches Information */}
+            {course.batches && course.batches.length > 0 && (
+              <div className="mt-2">
+                <small className="text-muted d-block mb-1">
+                  <i className="icofont-users-alt"></i> <strong>Batches:</strong>
+                </small>
+                {course.batches.map((batch, idx) => (
+                  <small key={batch.id} className="d-block text-muted ms-3 mb-1">
+                    • {batch.name} ({formatBatchTime(batch)})
+                    {batch.description && (
+                      <span className="text-muted"> - {batch.description}</span>
+                    )}
+                  </small>
+                ))}
+              </div>
+            )}
+
+            {/* Payment Information */}
+            <div className="mt-2 p-2 bg-light rounded">
+              <div className="d-flex justify-content-between align-items-center mb-1">
+                <small className="text-muted">
+                  <i className="icofont-wallet"></i> <strong>Payment:</strong>
+                </small>
+                <small className="fw-bold text-primary">
+                  {formatAmount(course.totalPaid || 0)} / {formatAmount(course.totalDue || course.price)}
+                </small>
+              </div>
+              {course.remainingBalance > 0 && (
+                <div className="d-flex justify-content-between align-items-center">
+                  <small className="text-warning">
+                    <i className="icofont-exclamation-circle"></i> Remaining:
+                  </small>
+                  <small className="fw-bold text-warning">
+                    {formatAmount(course.remainingBalance)}
+                  </small>
+                </div>
+              )}
+              {course.feePayments && course.feePayments.length > 0 && (
+                <div className="mt-1">
+                  <small className="text-muted">
+                    <i className="icofont-list"></i> {course.feePayments.length} Payment{course.feePayments.length !== 1 ? 's' : ''} made
+                  </small>
+                </div>
+              )}
+            </div>
+
+            {/* Course Modules Preview */}
+            {course.courseModules && course.courseModules.length > 0 && (
+              <div className="mt-2">
+                <small className="text-muted d-block mb-1">
+                  <i className="icofont-book"></i> <strong>Modules:</strong>
+                </small>
+                <div className="d-flex flex-wrap gap-1">
+                  {course.courseModules.slice(0, 3).map((module) => (
+                    <span key={module.id} className="badge bg-light text-dark">
+                      {module.title}
+                    </span>
+                  ))}
+                  {course.courseModules.length > 3 && (
+                    <span className="badge bg-secondary">
+                      +{course.courseModules.length - 3} more
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="grid__course__status populerarea__button">
+            <div className="progress mb-2">
+              <div
+                className={`progress-bar ${
+                  progressWidth === 100 ? "bg-success" : "bg-primary"
+                }`}
+                style={{ width: `${progressWidth}%` }}
+                role="progressbar"
+              >
+                {progressWidth}% Complete
+              </div>
+            </div>
+            {isCompleted ? (
+              <button 
+                className="default__button" 
+                type="button"
+                onClick={() => {
+                  toast.info("Certificate download feature coming soon");
+                }}
+              >
+                Download Certificate
+              </button>
+            ) : (
+              <button
+                className="default__button"
+                type="button"
+                onClick={() => {
+                  navigate(`/coursedetails/${course.courseId}`);
+                }}
+              >
+                Continue Learning
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
-    <ProfileHeader/>
+      <ProfileHeader />
         <div className="dashboard">
             <div className="container-fluid full__width__padding">
                 <div className="row">
-                        <Sidebar/>
+            <Sidebar />
                     <div className="col-xl-9 col-lg-9 col-md-12">
                         <div className="dashboard__content__wraper">
                             <div className="dashboard__section__title">
                             <h4>My Courses</h4>
                             </div>
 
-                            <ul className="nav about__button__wrap dashboard__button__wrap" id="myTab" role="tablist">
+                <ul
+                  className="nav about__button__wrap dashboard__button__wrap"
+                  id="myTab"
+                  role="tablist"
+                >
                             <li className="nav-item" role="presentation">
                                 <button
-                                className={`single__tab__link ${key === "enrolled" ? "active" : ""}`}
+                      className={`single__tab__link ${
+                        key === "enrolled" ? "active" : ""
+                      }`}
                                 onClick={() => setKey("enrolled")}
                                 type="button"
                                 >
-                                Enrolled Courses
+                      Enrolled Courses ({courses.length})
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button
-                                className={`single__tab__link ${key === "active" ? "active" : ""}`}
+                      className={`single__tab__link ${
+                        key === "active" ? "active" : ""
+                      }`}
                                 onClick={() => setKey("active")}
                                 type="button"
                                 >
-                                Active Courses
+                      Active Courses (
+                      {courses.filter((c) => c.status === "Active").length})
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button
-                                className={`single__tab__link ${key === "completed" ? "active" : ""}`}
+                      className={`single__tab__link ${
+                        key === "completed" ? "active" : ""
+                      }`}
                                 onClick={() => setKey("completed")}
                                 type="button"
                                 >
-                                Completed Courses
+                      Completed Courses (
+                      {courses.filter((c) => c.status === "Completed").length})
                                 </button>
                             </li>
                             </ul>
 
                             <div className="tab-content tab__content__wrapper" id="myTabContent">
-
-                            {/* ==================== ENROLLED COURSES ==================== */}
-                            {key === "enrolled" && (
                                 <div className="tab-pane fade show active">
-                                <div className="row">
-
-                                    {/* Course 1 - Completed */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <a href="../course-details.html"><img loading="lazy" src="../img/grid/grid_1.png" alt="grid" /></a>
-                                        <div className="gridarea__small__button"><div className="grid__badge">Data & Tech</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
+                    {isLoading ? (
+                      <div className="text-center py-5">
+                        <div className="spinner-border text-primary" role="status">
+                          <span className="visually-hidden">Loading...</span>
                                         </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 23 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 1 hr 30 min</li>
-                                            </ul>
+                        <p className="mt-3">Loading courses...</p>
                                         </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="../course-details.html">Foundation course to understand about software</a></h3>
+                    ) : error ? (
+                      <div className="text-center py-5 text-danger">
+                        <i className="icofont-close-circled fs-1"></i>
+                        <p className="mt-3">{error}</p>
+                        <button
+                          className="btn btn-primary mt-2"
+                          onClick={() => window.location.reload()}
+                        >
+                          Retry
+                        </button>
                                         </div>
-                                        <div className="gridarea__price">$32.00 <del>/ $67.00</del> <span><del className="del__2">Free</del></span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_1.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Micle Jhon</h6></div>
+                    ) : filteredCourses.length === 0 ? (
+                      <div className="text-center py-5 text-muted">
+                        <i className="icofont-book fs-1"></i>
+                        <p className="mt-3">
+                          No {key === "enrolled" ? "enrolled" : key === "active" ? "active" : "completed"}{" "}
+                          courses found
+                        </p>
                                             </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "100%"}} role="progressbar">100% Complete</div>
-                                        </div>
-                                        <a className="default__button" href="#">Download Certificate</a>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 2 - Completed */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <img loading="lazy" src="../img/grid/grid_2.png" alt="grid" />
-                                        <div className="gridarea__small__button"><div className="grid__badge blue__color">Mechanical</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 29 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 2 hr 10 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="#">Nidnies course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price green__color">$32.00<del>/$67.00</del> <span>.Free</span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_2.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Rinis Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "100%"}} role="progressbar">100% Complete</div>
-                                        </div>
-                                        <a className="default__button" href="#">Download Certificate</a>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 3 - Completed */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <img loading="lazy" src="../img/grid/grid_3.png" alt="grid" />
-                                        <div className="gridarea__small__button"><div className="grid__badge blue__color">Mechanical</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 29 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 2 hr 10 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="#">Nidnies course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price green__color">$32.00<del>/$67.00</del> <span>.Free</span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_2.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Rinis Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "100%"}} role="progressbar">100% Complete</div>
-                                        </div>
-                                        <a className="default__button" href="#">Download Certificate</a>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 4 - 80% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <a href="../course-details.html"><img loading="lazy" src="../img/grid/grid_1.png" alt="grid" /></a>
-                                        <div className="gridarea__small__button"><div className="grid__badge">Data & Tech</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 23 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 1 hr 30 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="../course-details.html">Foundation course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price">$32.00 <del>/ $67.00</del> <span><del className="del__2">Free</del></span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_1.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Micle Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "80%"}} role="progressbar">80% Complete</div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 5 - 70% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <img loading="lazy" src="../img/grid/grid_2.png" alt="grid" />
-                                        <div className="gridarea__small__button"><div className="grid__badge blue__color">Mechanical</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 29 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 2 hr 10 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="#">Nidnies course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price green__color">$32.00<del>/$67.00</del> <span>.Free</span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_2.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Rinis Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "70%"}} role="progressbar">70% Complete</div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 6 - 0% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <a href="../course-details.html"><img loading="lazy" src="../img/grid/grid_8.png" alt="grid" /></a>
-                                        <div className="gridarea__small__button"><div className="grid__badge pink__color">Development</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 25 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 1 hr 40 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="../course-details.html">Minws course to understand about solution</a></h3>
-                                        </div>
-                                        <div className="gridarea__price">$40.00 <del>/ $67.00</del> <span><del className="del__2">Free</del></span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_3.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Micle Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                </div>
-                                </div>
-                            )}
-
-                            {/* ==================== ACTIVE COURSES ==================== */}
-                            {key === "active" && (
-                                <div className="tab-pane fade show active">
-                                <div className="row">
-                                    {/* Course 4 - 80% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <a href="../course-details.html"><img loading="lazy" src="../img/grid/grid_1.png" alt="grid" /></a>
-                                        <div className="gridarea__small__button"><div className="grid__badge">Data & Tech</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 23 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 1 hr 30 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="../course-details.html">Foundation course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price">$32.00 <del>/ $67.00</del> <span><del className="del__2">Free</del></span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_1.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Micle Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "80%"}} role="progressbar">80% Complete</div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 5 - 70% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <img loading="lazy" src="../img/grid/grid_2.png" alt="grid" />
-                                        <div className="gridarea__small__button"><div className="grid__badge blue__color">Mechanical</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 29 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 2 hr 10 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="#">Nidnies course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price green__color">$32.00<del>/$67.00</del> <span>.Free</span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_2.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Rinis Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "70%"}} role="progressbar">70% Complete</div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                            )}
-
-                            {/* ==================== COMPLETED COURSES ==================== */}
-                            {key === "completed" && (
-                                <div className="tab-pane fade show active">
-                                <div className="row">
-                                    {/* Course 1 - 100% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <a href="../course-details.html"><img loading="lazy" src="../img/grid/grid_1.png" alt="grid" /></a>
-                                        <div className="gridarea__small__button"><div className="grid__badge">Data & Tech</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 23 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 1 hr 30 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="../course-details.html">Foundation course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price">$32.00 <del>/ $67.00</del> <span><del className="del__2">Free</del></span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_1.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Micle Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "100%"}} role="progressbar">100% Complete</div>
-                                        </div>
-                                        <a className="default__button" href="#">Download Certificate</a>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 2 - 100% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <img loading="lazy" src="../img/grid/grid_2.png" alt="grid" />
-                                        <div className="gridarea__small__button"><div className="grid__badge blue__color">Mechanical</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 29 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 2 hr 10 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="#">Nidnies course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price green__color">$32.00<del>/$67.00</del> <span>.Free</span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_2.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Rinis Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "100%"}} role="progressbar">100% Complete</div>
-                                        </div>
-                                        <a className="default__button" href="#">Download Certificate</a>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Course 3 - 100% */}
-                                    <div className="col-xl-4 col-lg-6 col-md-6 col-12">
-                                    <div className="gridarea__wraper">
-                                        <div className="gridarea__img">
-                                        <img loading="lazy" src="../img/grid/grid_3.png" alt="grid" />
-                                        <div className="gridarea__small__button"><div className="grid__badge blue__color">Mechanical</div></div>
-                                        <div className="gridarea__small__icon"><a href="#"><i className="icofont-heart-alt"></i></a></div>
-                                        </div>
-                                        <div className="gridarea__content">
-                                        <div className="gridarea__list">
-                                            <ul>
-                                            <li><i className="icofont-book-alt"></i> 29 Lesson</li>
-                                            <li><i className="icofont-clock-time"></i> 2 hr 10 min</li>
-                                            </ul>
-                                        </div>
-                                        <div className="gridarea__heading">
-                                            <h3><a href="#">Nidnies course to understand about software</a></h3>
-                                        </div>
-                                        <div className="gridarea__price green__color">$32.00<del>/$67.00</del> <span>.Free</span></div>
-                                        <div className="gridarea__bottom">
-                                            <a href="instructor-details.html">
-                                            <div className="gridarea__small__img">
-                                                <img loading="lazy" src="../img/grid/grid_small_2.jpg" alt="grid" />
-                                                <div className="gridarea__small__content"><h6>Rinis Jhon</h6></div>
-                                            </div>
-                                            </a>
-                                            <div className="gridarea__star">
-                                            <i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i><i className="icofont-star"></i>
-                                            <span>(44)</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div className="grid__course__status populerarea__button">
-                                        <div className="progress">
-                                            <div className="progress-bar" style={{width: "100%"}} role="progressbar">100% Complete</div>
-                                        </div>
-                                        <a className="default__button" href="#">Download Certificate</a>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                </div>
-                                </div>
-                            )}
-
+                    ) : (
+                      <div className="row">{filteredCourses.map(renderCourseCard)}</div>
+                    )}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>    
         </div>
-
-
-    
+      </div>
     </>
   );
 };

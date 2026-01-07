@@ -1,10 +1,31 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MobileMenu from "./MobileMenu";
+import { useAuth } from "../services/application/AuthContext";
+import { showSuccess } from "../services/application/toastService";
+import LogoutConfirmation from "./LogoutConfirmation";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
+
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const handleLogoutConfirm = async () => {
+    setShowLogoutConfirm(false);
+    await logout();
+    showSuccess("Logged out successfully");
+    navigate("/login", { replace: true });
+  };
+
+  const handleLogoutCancel = () => {
+    setShowLogoutConfirm(false);
+  };
 
   const openMobileMenu = () => setMenuOpen(true);
   const closeMobileMenu = () => setMenuOpen(false);
@@ -53,18 +74,39 @@ const Header = () => {
                     <li><Link to="/courses">Courses</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
-                    <li><Link to="/profile">View Profile</Link></li>
+                    <li><Link to="/verify-certificate" style={{ color: '#5f2ded', fontWeight: '600' }}>
+                      <i className="icofont-certificate-alt me-2"></i>Verify Certificate
+                    </Link></li>
+                    {/* <li><Link to="/profile">View Profile</Link></li> */}
                   </ul>
                 </nav>
               </div>
             </div>
 
-            {/* Login Button */}
+            {/* Login/Logout Button */}
             <div className="col-xl-3 col-lg-3">
               <div className="headerarea__right">
                 {location.pathname !== '/login' && (
                   <div className="headerarea__button">
-                    <Link to="/login">Login</Link>
+                    {isAuthenticated ? (
+                      <button 
+                        onClick={handleLogoutClick}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: 'inherit',
+                          cursor: 'pointer',
+                          fontSize: 'inherit',
+                          fontFamily: 'inherit',
+                          textDecoration: 'none',
+                          padding: '8px 16px',
+                        }}
+                      >
+                        Logout
+                      </button>
+                    ) : (
+                      <Link to="/login">Login</Link>
+                    )}
                   </div>
                 )}
               </div>
@@ -121,6 +163,13 @@ const Header = () => {
       </div>
 
       <MobileMenu isOpen={menuOpen} onClose={closeMobileMenu} />
+      
+      {/* Logout Confirmation Dialog */}
+      <LogoutConfirmation
+        isOpen={showLogoutConfirm}
+        onConfirm={handleLogoutConfirm}
+        onCancel={handleLogoutCancel}
+      />
     </header>
   );
 };

@@ -1,8 +1,31 @@
 // src/components/Footer.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../services/application/AuthContext";
 
 const Footer = () => {
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
+
+  // Define protected routes where footer should be hidden when logged in
+  const protectedRoutes = [
+    '/dashboard',
+    '/profile',
+    '/enrolledCourses',
+    '/feeSection',
+  ];
+
+  // Check if current route is a protected route
+  const isProtectedRoute = protectedRoutes.some(route => 
+    location.pathname.startsWith(route)
+  );
+
+  // Hide footer on protected routes when user is logged in
+  // Show footer on public routes always (whether logged in or not)
+  if (isAuthenticated && isProtectedRoute) {
+    return null;
+  }
+
   return (
     <div className="footerarea">
       <div className="container">
@@ -51,6 +74,9 @@ const Footer = () => {
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/courses">Courses</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
+                    <li><Link to="/verify-certificate" style={{ color: '#5f2ded', fontWeight: '600' }}>
+                      <i className="icofont-certificate-alt me-2"></i>Verify Certificate
+                    </Link></li>
                   </ul>
                 </div>
               </div>

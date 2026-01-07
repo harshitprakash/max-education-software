@@ -1,120 +1,105 @@
 // pages/CourseDetails.jsx
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import courses from "../data/courses.json";
-import coursesData from "../data/coursesdetails.json";
+import React, { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { studentService } from "../services/application/studentService";
+import { toast } from "react-toastify";
 
 const CourseDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [course, setCourse] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Find course in both files
-  const courseBasic = courses.courses.find((c) => c.id === parseInt(id));
-  const courseDetail = coursesData.courses.find((c) => c.id === parseInt(id));
+  // Format amount to currency
+  const formatAmount = (amount) => {
+    if (!amount) return "Free";
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
 
-  // Merge data: details override basic, fallback to basic
-  const course = { ...courseBasic, ...courseDetail };
+  // Format date
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
 
-  const [activeTab, setActiveTab] = useState("projects__one");
+  // Format batch time
+  const formatBatchTime = (batch) => {
+    if (!batch || !batch.startTime || !batch.endTime) return "";
+    return `${batch.startTime} - ${batch.endTime}`;
+  };
 
-  if (!course) {
+  // Fetch course data
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const courses = await studentService.getCourses();
+        const foundCourse = courses.find((c) => c.courseId === parseInt(id));
+
+        if (!foundCourse) {
+          setError("Course not found");
+          return;
+        }
+
+        setCourse(foundCourse);
+      } catch (err) {
+        setError(err.message || "Failed to load course");
+        toast.error(err.message || "Failed to load course");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchCourse();
+    }
+  }, [id]);
+
+  if (isLoading) {
     return (
       <div className="container py-5 text-center">
-        <h2>Course Not Found</h2>
-        <Link to="/courses" className="default__button">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p className="mt-3">Loading course details...</p>
+      </div>
+    );
+  }
+
+  if (error || !course) {
+    return (
+      <div className="container py-5 text-center">
+        <h2>{error || "Course Not Found"}</h2>
+        <Link to="/courses" className="default__button mt-3">
           Back to Courses
         </Link>
       </div>
     );
   }
 
-  const {
-    title,
-    category,
-    img,
-    description,
-    instructorName,
-    price,
-    badgeClass,
-    syllabus = [],
-    totalduration = 0,
-  } = course;
-
-  // Render lessons
-  const renderLesson = (lesson, index) => {
-    if (typeof lesson === "string") {
-      return (
-        <div className="scc__wrap" key={index}>
-          <div className="scc__info">
-            <h5>
-              <span>Topic :</span> {lesson}
-            </h5>
-          </div>
-         
-        </div>
-      );
-    }
-
-    if (lesson.type === "video") {
-      return (
-        <div className="scc__wrap" key={index}>
-          <div className="scc__info">
-            <i className="icofont-video-alt"></i>
-            <h5>
-              <span>Video :</span> {lesson.title}
-            </h5>
-          </div>
-          <div className="scc__meta">
-            {lesson.duration ? (
-              <>
-                <span className="time">
-                  <i className="icofont-clock-time"></i> {lesson.duration}
-                </span>
-                {lesson.preview ? (
-                  <a href={`/lesson/${id}/${index}`}>
-                    <span className="question">
-                      <i className="icofont-eye"></i> Preview
-                    </span>
-                  </a>
-                ) : (
-                  <a href="#">
-                    <span>
-                      <i className="icofont-lock"></i>
-                    </span>
-                  </a>
-                )}
-              </>
-            ) : (
-              <a href="#">
-                <span>
-                  <i className="icofont-lock"></i>
-                </span>
-              </a>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    if (lesson.type === "exam") {
-      return (
-        <div className="scc__wrap" key={index}>
-          <div className="scc__info">
-            <i className="icofont-file-text"></i>
-            <h5>
-              <span>Exam :</span>
-            </h5>
-          </div>
-          <div className="scc__meta">
-            <span>
-              <i className="icofont-lock"></i> {lesson.questions} Ques
-            </span>
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  };
+  const courseName = course.courseName || "Course";
+  const courseCode = course.courseCode || "";
+  const courseDescription = course.courseDescription || "";
+  const courseImage =
+    course.courseModules && course.courseModules.length > 0
+      ? course.courseModules[0].imageUrl
+      : "/img/courses/basic_course.jpg";
+  const price = course.price || 0;
+  const discount = course.discount || 0;
+  const courseModules = course.courseModules || [];
+  const batches = course.batches || [];
 
   return (
     <>
@@ -122,7 +107,7 @@ const CourseDetails = () => {
       <div className="breadcrumbarea breadcrumbarea--2">
         <div className="container">
           <div className="row">
-            <div className="col-xl-8">
+            <div className="col-xl-12">
               <div className="breadcrumb__content__wraper" data-aos="fade-up">
                 <div className="breadcrumb__inner text-start">
                   <ul>
@@ -132,7 +117,7 @@ const CourseDetails = () => {
                     <li>
                       <Link to="/courses">Courses</Link>
                     </li>
-                    <li>{title}</li>
+                    <li>{courseName}</li>
                   </ul>
                 </div>
               </div>
@@ -140,131 +125,158 @@ const CourseDetails = () => {
               <div className="course__details__top--2">
                 <div className="course__button__wraper" data-aos="fade-up">
                   <div className="course__button">
-                    <a className={`course__2 ${badgeClass || ""}`} href="#">
-                      {category}
-                    </a>
+                    <span className="course__2">{courseCode || "Course"}</span>
                   </div>
                 </div>
                 <div className="course__details__heading mt-3" data-aos="fade-up">
-                  <h3>{title}</h3>
-                </div>
-                <div className="course__details__price mt-3" data-aos="fade-up">
-                  <ul>
-                    <li>
-                      <div className="course__details__date">
-                        <i className="icofont-user-alt-3"></i> {instructorName}
-                      </div>
-                    </li>
-                  </ul>
+                  <h3>{courseName}</h3>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="shape__icon__2">
-          {[1, 2, 3, 5].map((n) => (
-            <img
-              key={n}
-              loading="lazy"
-              className={`shape__icon__img shape__icon__img__${n}`}
-              src={`/img/herobanner/herobanner__${n}.png`}
-              alt="decor"
-            />
-          ))}
-        </div>
       </div>
 
-      {/* MAIN */}
+      {/* MAIN CONTENT */}
       <div className="blogarea__2 sp_top_100 sp_bottom_100">
         <div className="container">
           <div className="row">
-            {/* LEFT: TABS */}
+            {/* LEFT: MAIN CONTENT */}
             <div className="col-xl-8 col-lg-8">
               <div className="blog__details__content__wraper">
-                <div className="course__details__tab__wrapper" data-aos="fade-up">
-                  <ul className="nav course__tap__wrap" id="myTab" role="tablist">
-                    <li className="nav-item">
-                      <button
-                        className={`single__tab__link ${
-                          activeTab === "projects__one" ? "active" : ""
-                        }`}
-                        onClick={() => setActiveTab("projects__one")}
-                      >
-                        <i className="icofont-paper"></i> Description
-                      </button>
-                    </li>
-                    <li className="nav-item">
-                      <button
-                        className={`single__tab__link ${
-                          activeTab === "projects__two" ? "active" : ""
-                        }`}
-                        onClick={() => setActiveTab("projects__two")}
-                      >
-                        <i className="icofont-book-alt"></i> Curriculum
-                      </button>
-                    </li>
-                  </ul>
+                {/* Course Info Icons */}
+                <div className="mb-4" data-aos="fade-up">
+                  <div className="d-flex flex-wrap gap-3 text-muted">
+                    {batches.length > 0 && (
+                      <span>
+                        <i className="icofont-clock-time"></i>{" "}
+                        {formatBatchTime(batches[0])}
+                        {batches.length > 1 && ` (+${batches.length - 1} more)`}
+                      </span>
+                    )}
+                    {course.enrollmentDate && (
+                      <span>
+                        <i className="icofont-calendar"></i> Enrolled:{" "}
+                        {formatDate(course.enrollmentDate)}
+                      </span>
+                    )}
+                    {course.startDate && (
+                      <span>
+                        <i className="icofont-calendar"></i> Start:{" "}
+                        {formatDate(course.startDate)}
+                      </span>
+                    )}
+                    {courseModules.length > 0 && (
+                      <span>
+                        <i className="icofont-book-alt"></i> {courseModules.length} Module
+                        {courseModules.length !== 1 ? "s" : ""}
+                      </span>
+                    )}
+                  </div>
+                </div>
 
-                  <div className="tab-content tab__content__wrapper" id="myTabContent">
-                    {/* DESCRIPTION */}
-                    <div
-                      className={`tab-pane fade ${
-                        activeTab === "projects__one" ? "active show" : ""
+                {/* Status Badges */}
+                <div className="mb-4" data-aos="fade-up">
+                  <span
+                    className={`badge me-2 ${
+                      course.status === "Active"
+                        ? "bg-success"
+                        : course.status === "Completed"
+                        ? "bg-primary"
+                        : "bg-secondary"
+                    }`}
+                  >
+                    {course.status}
+                  </span>
+                  {course.paymentStatus && (
+                    <span
+                      className={`badge ${
+                        course.paymentStatus === "Paid"
+                          ? "bg-success"
+                          : course.paymentStatus === "Pending"
+                          ? "bg-warning"
+                          : "bg-danger"
                       }`}
-                      id="projects__one"
                     >
-                      <div className="experence__heading">
-                        <h5>Course Description</h5>
-                      </div>
-                      <div className="experence__description">
-                        <p className="description__1">{description}</p>
-                      </div>
-                    </div>
+                      {course.paymentStatus}
+                    </span>
+                  )}
+                </div>
 
-                    {/* CURRICULUM */}
-                    <div
-                      className={`tab-pane fade ${
-                        activeTab === "projects__two" ? "active show" : ""
-                      }`}
-                      id="projects__two"
-                    >
-                      {Array.isArray(syllabus) && syllabus.length > 0 ? (
-                        <div className="accordion content__cirriculum__wrap" id="accordionExample">
-                          {syllabus.map((section, i) => (
-                            <div className="accordion-item" key={i}>
-                              <h2 className="accordion-header" id={`heading${i}`}>
-                                <button
-                                  className={`accordion-button ${i === 0 ? "" : "collapsed"}`}
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target={`#collapse${i}`}
-                                  aria-expanded={i === 0}
-                                >
-                                  {section.section} <span>{section.duration || ""}</span>
-                                </button>
-                              </h2>
-                              <div
-                                id={`collapse${i}`}
-                                className={`accordion-collapse collapse ${i === 0 ? "show" : ""}`}
-                                data-bs-parent="#accordionExample"
-                              >
-                                <div className="accordion-body">
-                                  {Array.isArray(section.topics) &&
-                                    section.topics.map((lesson, j) =>
-                                      renderLesson(lesson, `${i}-${j}`)
-                                    )}
-                                </div>
+                {/* Course Description */}
+                <div className="mb-4" data-aos="fade-up">
+                  <h5 className="mb-3">Course Description</h5>
+                  <div
+                    className="text-muted"
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        courseDescription || "No description available.",
+                    }}
+                  />
+                </div>
+
+                {/* Batches */}
+                {batches.length > 0 && (
+                  <div className="mb-4" data-aos="fade-up">
+                    <h5 className="mb-3">Batches</h5>
+                    <div className="list-group">
+                      {batches.map((batch) => (
+                        <div key={batch.id} className="list-group-item">
+                          <div className="d-flex justify-content-between align-items-center">
+                            <div>
+                              <strong>{batch.name}</strong>
+                              <div className="text-muted small">
+                                {formatBatchTime(batch)}
+                                {batch.description && ` - ${batch.description}`}
                               </div>
                             </div>
-                          ))}
+                          </div>
                         </div>
-                      ) : (
-                        <p>No curriculum available.</p>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Payment Summary */}
+                {(course.totalPaid > 0 || course.remainingBalance > 0) && (
+                  <div className="mb-4 p-3 bg-light rounded" data-aos="fade-up">
+                    <h5 className="mb-3">Payment Summary</h5>
+                    <div className="row">
+                      <div className="col-md-6 mb-2">
+                        <strong>Payment:</strong> {formatAmount(course.totalPaid || 0)} /{" "}
+                        {formatAmount(price)}
+                      </div>
+                      {course.remainingBalance > 0 && (
+                        <div className="col-md-6 mb-2">
+                          <strong className="text-warning">Remaining:</strong>{" "}
+                          {formatAmount(course.remainingBalance)}
+                        </div>
+                      )}
+                      {course.feePayments && course.feePayments.length > 0 && (
+                        <div className="col-12 mt-2">
+                          <small className="text-muted">
+                            {course.feePayments.length} Payment
+                            {course.feePayments.length !== 1 ? "s" : ""} made
+                          </small>
+                        </div>
                       )}
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* Modules */}
+                {courseModules.length > 0 && (
+                  <div className="mb-4" data-aos="fade-up">
+                    <h5 className="mb-3">Course Modules</h5>
+                    <div className="d-flex flex-wrap gap-2">
+                      {courseModules.map((module) => (
+                        <span key={module.id} className="badge bg-secondary p-2">
+                          {module.title}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -272,41 +284,85 @@ const CourseDetails = () => {
             <div className="col-xl-4 col-lg-4">
               <div className="course__details__sidebar--2">
                 <div className="event__sidebar__wraper" data-aos="fade-up">
-                  <div className="blogarae__img__2 course__details__img__2">
-                    <img loading="lazy" src={img} alt={title} className="img-fluid rounded" />
+                  <div className="blogarae__img__2 course__details__img__2 mb-3">
+                    <img
+                      loading="lazy"
+                      src={courseImage}
+                      alt={courseName}
+                      className="img-fluid rounded"
+                      onError={(e) => {
+                        e.target.src = "/img/courses/basic_course.jpg";
+                      }}
+                    />
                   </div>
-                  <div className="text-center my-4">
-                    <h3 className="fw-bold">{price}</h3>
+
+                  <div className="text-center mb-4">
+                    <h3 className="fw-bold text-primary mb-0">
+                      {formatAmount(price)}
+                    </h3>
+                    {discount > 0 && (
+                      <p className="text-muted small mt-1">
+                        <del>{formatAmount(price)}</del>{" "}
+                        <span className="text-success">
+                          Save {formatAmount(discount)}
+                        </span>
+                      </p>
+                    )}
                   </div>
-                  <div className="course__summery__button">
-                    <a className="default__button w-100" href="#">
-                      Enroll Now
-                    </a>
+
+                  <div className="course__summery__button mb-4">
+                    {course.status === "Active" || course.status === "Completed" ? (
+                      <button
+                        className="default__button w-100"
+                        type="button"
+                        onClick={() => {
+                          navigate("/enrolledCourses");
+                        }}
+                      >
+                        {course.status === "Completed"
+                          ? "View Certificate"
+                          : "Continue Learning"}
+                      </button>
+                    ) : (
+                      <button
+                        className="default__button w-100"
+                        type="button"
+                        onClick={() => {
+                          toast.info("Enrollment feature coming soon");
+                        }}
+                      >
+                        Enroll Now
+                      </button>
+                    )}
                   </div>
-                  <div className="course__summery__lists mt-4">
+
+                  <div className="course__summery__lists">
                     <ul>
-                      <li className="d-flex justify-content-between">
-                        <span><i className="icofont-book"></i> Course:</span>
-                        <strong className="text-dark">{title}</strong>
+                      <li className="d-flex justify-content-between mb-2">
+                        <span>
+                          <i className="icofont-book"></i> Course:
+                        </span>
+                        <strong className="text-dark">{courseName}</strong>
                       </li>
-                      <li className="d-flex justify-content-between">
-                        <span><i className="icofont-tags"></i> Category:</span>
-                        <strong className="text-dark">{category}</strong>
+                      <li className="d-flex justify-content-between mb-2">
+                        <span>
+                          <i className="icofont-tags"></i> Code:
+                        </span>
+                        <strong className="text-dark">{courseCode || "N/A"}</strong>
                       </li>
-                      <li className="d-flex justify-content-between">
-                        <span><i className="icofont-user-alt-3"></i> Instructor:</span>
-                        <strong className="text-dark">{instructorName}</strong>
-                      </li>
-                      <li className="d-flex justify-content-between">
-                        <span><i className="icofont-clock-time"></i> Duration:</span>
-                        <strong className="text-dark">{totalduration} months</strong>
-                      </li>
+                      {courseModules.length > 0 && (
+                        <li className="d-flex justify-content-between mb-2">
+                          <span>
+                            <i className="icofont-book-alt"></i> Modules:
+                          </span>
+                          <strong className="text-dark">{courseModules.length}</strong>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

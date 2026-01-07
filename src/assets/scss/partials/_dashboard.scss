@@ -448,7 +448,7 @@
         label{
             display: block;
             font-size: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
             font-weight: 600;
             text-transform: capitalize;
             color: var(--blackColor);
@@ -465,9 +465,16 @@
             padding: 10px 20px;
             font-size: 14px;
             color:var(--contentColor) ;
-            margin-bottom: 15px;
-
-
+            margin-bottom: 0;
+            transition: border-color var(--transition);
+            &:focus{
+                outline: none;
+                border-color: var(--primaryColor);
+            }
+            &:disabled{
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
         }
         textarea{
             width: 100%;
@@ -478,7 +485,67 @@
             padding: 10px 20px;
             font-size: 14px;
             color: var(--contentColor);
-            margin-bottom: 15px;
+            margin-bottom: 0;
+            transition: border-color var(--transition);
+            resize: vertical;
+            &:focus{
+                outline: none;
+                border-color: var(--primaryColor);
+            }
+            &:disabled{
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+        select{
+            width: 100%;
+            background-color: transparent;
+            border: 2px solid var(--borderColor);
+            border-radius: 6px;
+            line-height: 23px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: var(--contentColor);
+            margin-bottom: 0;
+            cursor: pointer;
+            transition: border-color var(--transition);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%235F6C76' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px 8px;
+            padding-right: 40px;
+            &:focus{
+                outline: none;
+                border-color: var(--primaryColor);
+            }
+            &:hover{
+                border-color: var(--borderColor2);
+            }
+            &:disabled{
+                opacity: 0.6;
+                cursor: not-allowed;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23C4C4C4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
+            option{
+                padding: 10px 20px;
+                background-color: var(--whiteColor);
+                color: var(--contentColor);
+                font-size: 14px;
+            }
+        }
+        .form__error{
+            color: var(--secondaryColor3);
+            font-size: 12px;
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+        input.input--error,
+        textarea.input--error,
+        select.input--error{
+            border-color: var(--secondaryColor3);
         }
     }
     .counterarea__text__wraper {
