@@ -1,7 +1,6 @@
 // components/cards/CourseCard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import data from "../../data/courses.json"; // Your JSON
 
 const CourseCard = ({
   img,
@@ -11,11 +10,8 @@ const CourseCard = ({
   description,
   title,
   instructorLink = "#",
+  courseLink = "#",
 }) => {
-  // Find course by title
-  const course = data.courses.find((c) => c.title === title);
-  const courseId = course?.id;
-  const courseLink = courseId ? `/coursedetails/${courseId}` : "#";
 
   return (
     <div className="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12" data-aos="fade-up">

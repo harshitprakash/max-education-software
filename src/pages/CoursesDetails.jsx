@@ -1,12 +1,14 @@
 // pages/CourseDetails.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { studentService } from "../services/application/studentService";
+import { courseService } from "../services/application/courseService";
 import { toast } from "react-toastify";
+import { useAuth } from "../services/application/AuthContext";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [course, setCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,39 +23,21 @@ const CourseDetails = () => {
     }).format(amount);
   };
 
-  // Format date
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  };
-
-  // Format batch time
-  const formatBatchTime = (batch) => {
-    if (!batch || !batch.startTime || !batch.endTime) return "";
-    return `${batch.startTime} - ${batch.endTime}`;
-  };
-
-  // Fetch course data
+  // Fetch course data from public API
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        const courses = await studentService.getCourses();
-        const foundCourse = courses.find((c) => c.courseId === parseInt(id));
-
-        if (!foundCourse) {
+        const courseData = await courseService.getCourseDetails(id);
+        
+        if (!courseData) {
           setError("Course not found");
           return;
         }
 
-        setCourse(foundCourse);
+        setCourse(courseData);
       } catch (err) {
         setError(err.message || "Failed to load course");
         toast.error(err.message || "Failed to load course");
@@ -91,15 +75,23 @@ const CourseDetails = () => {
 
   const courseName = course.courseName || "Course";
   const courseCode = course.courseCode || "";
-  const courseDescription = course.courseDescription || "";
-  const courseImage =
-    course.courseModules && course.courseModules.length > 0
-      ? course.courseModules[0].imageUrl
-      : "/img/courses/basic_course.jpg";
+  const description = course.description || "";
   const price = course.price || 0;
-  const discount = course.discount || 0;
-  const courseModules = course.courseModules || [];
-  const batches = course.batches || [];
+  const monthlyPrice = course.monthlyPrice || 0;
+  const packagePrice = course.packagePrice || 0;
+  const duration = course.duration || "";
+  const credits = course.credits || 0;
+  const teacherName = course.teacherName || "";
+  const branchName = course.branchName || "";
+  const categoryName = course.categoryName || "";
+  const categoryDescription = course.categoryDescription || "";
+  const modules = course.modules || [];
+  
+  // Get first module image as course image, or use default
+  const courseImage =
+    modules.length > 0 && modules[0].imageUrl
+      ? modules[0].imageUrl
+      : "/img/courses/basic_course.jpg";
 
   return (
     <>
@@ -147,132 +139,129 @@ const CourseDetails = () => {
                 {/* Course Info Icons */}
                 <div className="mb-4" data-aos="fade-up">
                   <div className="d-flex flex-wrap gap-3 text-muted">
-                    {batches.length > 0 && (
+                    {duration && (
                       <span>
-                        <i className="icofont-clock-time"></i>{" "}
-                        {formatBatchTime(batches[0])}
-                        {batches.length > 1 && ` (+${batches.length - 1} more)`}
+                        <i className="icofont-clock-time"></i> {duration}
                       </span>
                     )}
-                    {course.enrollmentDate && (
+                    {credits > 0 && (
                       <span>
-                        <i className="icofont-calendar"></i> Enrolled:{" "}
-                        {formatDate(course.enrollmentDate)}
+                        <i className="icofont-book-alt"></i> {credits} Credit
+                        {credits !== 1 ? "s" : ""}
                       </span>
                     )}
-                    {course.startDate && (
+                    {modules.length > 0 && (
                       <span>
-                        <i className="icofont-calendar"></i> Start:{" "}
-                        {formatDate(course.startDate)}
+                        <i className="icofont-listine-dots"></i> {modules.length} Module
+                        {modules.length !== 1 ? "s" : ""}
                       </span>
                     )}
-                    {courseModules.length > 0 && (
+                    {teacherName && (
                       <span>
-                        <i className="icofont-book-alt"></i> {courseModules.length} Module
-                        {courseModules.length !== 1 ? "s" : ""}
+                        <i className="icofont-user"></i> {teacherName}
+                      </span>
+                    )}
+                    {branchName && (
+                      <span>
+                        <i className="icofont-location-pin"></i> {branchName}
                       </span>
                     )}
                   </div>
                 </div>
 
-                {/* Status Badges */}
-                <div className="mb-4" data-aos="fade-up">
-                  <span
-                    className={`badge me-2 ${
-                      course.status === "Active"
-                        ? "bg-success"
-                        : course.status === "Completed"
-                        ? "bg-primary"
-                        : "bg-secondary"
-                    }`}
-                  >
-                    {course.status}
-                  </span>
-                  {course.paymentStatus && (
-                    <span
-                      className={`badge ${
-                        course.paymentStatus === "Paid"
-                          ? "bg-success"
-                          : course.paymentStatus === "Pending"
-                          ? "bg-warning"
-                          : "bg-danger"
-                      }`}
-                    >
-                      {course.paymentStatus}
+                {/* Category Badge */}
+                {categoryName && (
+                  <div className="mb-4" data-aos="fade-up">
+                    <span className="badge bg-primary me-2 p-2">
+                      <i className="icofont-tags me-1"></i>
+                      {categoryName}
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
 
                 {/* Course Description */}
                 <div className="mb-4" data-aos="fade-up">
                   <h5 className="mb-3">Course Description</h5>
-                  <div
-                    className="text-muted"
+                  <div 
+                    className="text-muted" 
+                    style={{ lineHeight: '1.8' }}
                     dangerouslySetInnerHTML={{
-                      __html:
-                        courseDescription || "No description available.",
+                      __html: description || "No description available."
                     }}
                   />
                 </div>
 
-                {/* Batches */}
-                {batches.length > 0 && (
+                {/* Category Description */}
+                {categoryDescription && (
                   <div className="mb-4" data-aos="fade-up">
-                    <h5 className="mb-3">Batches</h5>
-                    <div className="list-group">
-                      {batches.map((batch) => (
-                        <div key={batch.id} className="list-group-item">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <strong>{batch.name}</strong>
-                              <div className="text-muted small">
-                                {formatBatchTime(batch)}
-                                {batch.description && ` - ${batch.description}`}
+                    <h5 className="mb-3">Category: {categoryName}</h5>
+                    <div 
+                      className="text-muted" 
+                      style={{ lineHeight: '1.8' }}
+                      dangerouslySetInnerHTML={{
+                        __html: categoryDescription
+                      }}
+                    />
+                  </div>
+                )}
+
+                {/* Course Modules */}
+                {modules.length > 0 && (
+                  <div className="mb-4" data-aos="fade-up">
+                    <h5 className="mb-3">Course Modules</h5>
+                    <div className="row g-4">
+                      {modules.map((module, index) => (
+                        <div key={module.id} className="col-12">
+                          <div className="card border-0 shadow-sm h-100">
+                            <div className="row g-0">
+                              {module.imageUrl && (
+                                <div className="col-md-4">
+                                  <img
+                                    src={module.imageUrl}
+                                    alt={module.title}
+                                    className="img-fluid rounded-start"
+                                    style={{
+                                      width: '100%',
+                                      height: '100%',
+                                      objectFit: 'cover',
+                                      minHeight: '200px'
+                                    }}
+                                    onError={(e) => {
+                                      e.target.src = "/img/courses/basic_course.jpg";
+                                    }}
+                                  />
+                                </div>
+                              )}
+                              <div className={module.imageUrl ? "col-md-8" : "col-12"}>
+                                <div className="card-body">
+                                  <div className="d-flex align-items-start mb-2">
+                                    <span className="badge bg-primary me-2" style={{ fontSize: '0.875rem' }}>
+                                      Module {index + 1}
+                                    </span>
+                                  </div>
+                                  <h6 className="card-title mb-2" style={{ fontWeight: '600' }}>
+                                    {module.title}
+                                  </h6>
+                                  {module.subtitle && (
+                                    <p className="text-muted small mb-2" style={{ fontStyle: 'italic' }}>
+                                      {module.subtitle}
+                                    </p>
+                                  )}
+                                  {module.description && (
+                                    <div 
+                                      className="card-text text-muted small" 
+                                      style={{ lineHeight: '1.6' }}
+                                      
+                                      dangerouslySetInnerHTML={{
+                                        __html: module.description
+                                      }}
+                                    />
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Payment Summary */}
-                {(course.totalPaid > 0 || course.remainingBalance > 0) && (
-                  <div className="mb-4 p-3 bg-light rounded" data-aos="fade-up">
-                    <h5 className="mb-3">Payment Summary</h5>
-                    <div className="row">
-                      <div className="col-md-6 mb-2">
-                        <strong>Payment:</strong> {formatAmount(course.totalPaid || 0)} /{" "}
-                        {formatAmount(price)}
-                      </div>
-                      {course.remainingBalance > 0 && (
-                        <div className="col-md-6 mb-2">
-                          <strong className="text-warning">Remaining:</strong>{" "}
-                          {formatAmount(course.remainingBalance)}
-                        </div>
-                      )}
-                      {course.feePayments && course.feePayments.length > 0 && (
-                        <div className="col-12 mt-2">
-                          <small className="text-muted">
-                            {course.feePayments.length} Payment
-                            {course.feePayments.length !== 1 ? "s" : ""} made
-                          </small>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Modules */}
-                {courseModules.length > 0 && (
-                  <div className="mb-4" data-aos="fade-up">
-                    <h5 className="mb-3">Course Modules</h5>
-                    <div className="d-flex flex-wrap gap-2">
-                      {courseModules.map((module) => (
-                        <span key={module.id} className="badge bg-secondary p-2">
-                          {module.title}
-                        </span>
                       ))}
                     </div>
                   </div>
@@ -296,34 +285,42 @@ const CourseDetails = () => {
                     />
                   </div>
 
+                  {/* Pricing */}
                   <div className="text-center mb-4">
-                    <h3 className="fw-bold text-primary mb-0">
-                      {formatAmount(price)}
-                    </h3>
-                    {discount > 0 && (
-                      <p className="text-muted small mt-1">
-                        <del>{formatAmount(price)}</del>{" "}
-                        <span className="text-success">
-                          Save {formatAmount(discount)}
-                        </span>
-                      </p>
+                    {packagePrice > 0 && (
+                      <>
+                        <h3 className="fw-bold text-primary mb-0">
+                          {formatAmount(packagePrice)}
+                        </h3>
+                        <p className="text-muted small mt-1 mb-2">
+                          Package Price
+                        </p>
+                      </>
+                    )}
+                    {!packagePrice && price > 0 && (
+                      <>
+                        <h3 className="fw-bold text-primary mb-0">
+                          {formatAmount(price)}
+                        </h3>
+                        <p className="text-muted small mt-1 mb-2">
+                          Course Price
+                        </p>
+                      </>
+                    )}
+                    {monthlyPrice > 0 && packagePrice > 0 && (
+                      <div className="mt-3 pt-3 border-top">
+                        <p className="text-muted small mb-1">Or pay monthly:</p>
+                        <p className="fw-bold text-dark mb-0">
+                          {formatAmount(monthlyPrice)}
+                          <span className="text-muted small"> / month</span>
+                        </p>
+                      </div>
                     )}
                   </div>
 
+                  {/* Enroll Button */}
                   <div className="course__summery__button mb-4">
-                    {course.status === "Active" || course.status === "Completed" ? (
-                      <button
-                        className="default__button w-100"
-                        type="button"
-                        onClick={() => {
-                          navigate("/enrolledCourses");
-                        }}
-                      >
-                        {course.status === "Completed"
-                          ? "View Certificate"
-                          : "Continue Learning"}
-                      </button>
-                    ) : (
+                    {isAuthenticated ? (
                       <button
                         className="default__button w-100"
                         type="button"
@@ -333,9 +330,21 @@ const CourseDetails = () => {
                       >
                         Enroll Now
                       </button>
+                    ) : (
+                      <button
+                        className="default__button w-100"
+                        type="button"
+                        onClick={() => {
+                          navigate("/login");
+                          toast.info("Please login to enroll in this course");
+                        }}
+                      >
+                        Login to Enroll
+                      </button>
                     )}
                   </div>
 
+                  {/* Course Summary */}
                   <div className="course__summery__lists">
                     <ul>
                       <li className="d-flex justify-content-between mb-2">
@@ -350,12 +359,52 @@ const CourseDetails = () => {
                         </span>
                         <strong className="text-dark">{courseCode || "N/A"}</strong>
                       </li>
-                      {courseModules.length > 0 && (
+                      {duration && (
                         <li className="d-flex justify-content-between mb-2">
                           <span>
-                            <i className="icofont-book-alt"></i> Modules:
+                            <i className="icofont-clock-time"></i> Duration:
                           </span>
-                          <strong className="text-dark">{courseModules.length}</strong>
+                          <strong className="text-dark">{duration}</strong>
+                        </li>
+                      )}
+                      {credits > 0 && (
+                        <li className="d-flex justify-content-between mb-2">
+                          <span>
+                            <i className="icofont-book-alt"></i> Credits:
+                          </span>
+                          <strong className="text-dark">{credits}</strong>
+                        </li>
+                      )}
+                      {modules.length > 0 && (
+                        <li className="d-flex justify-content-between mb-2">
+                          <span>
+                            <i className="icofont-listine-dots"></i> Modules:
+                          </span>
+                          <strong className="text-dark">{modules.length}</strong>
+                        </li>
+                      )}
+                      {teacherName && (
+                        <li className="d-flex justify-content-between mb-2">
+                          <span>
+                            <i className="icofont-user"></i> Teacher:
+                          </span>
+                          <strong className="text-dark">{teacherName}</strong>
+                        </li>
+                      )}
+                      {branchName && (
+                        <li className="d-flex justify-content-between mb-2">
+                          <span>
+                            <i className="icofont-location-pin"></i> Branch:
+                          </span>
+                          <strong className="text-dark">{branchName}</strong>
+                        </li>
+                      )}
+                      {categoryName && (
+                        <li className="d-flex justify-content-between mb-2">
+                          <span>
+                            <i className="icofont-tags"></i> Category:
+                          </span>
+                          <strong className="text-dark">{categoryName}</strong>
                         </li>
                       )}
                     </ul>
