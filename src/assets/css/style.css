@@ -10956,7 +10956,7 @@ Breadcrumb Area
 }
 .dashboard__content__wraper {
   box-shadow: 0 0 20px 10px rgba(95, 45, 237, 0.02);
-  padding: 50px 40px;
+  padding: 10px 40px;
   background: var(--whiteColor);
   margin-bottom: 30px;
   border-radius: var(--borderRadius2);
@@ -11238,7 +11238,6 @@ Breadcrumb Area
 .dashboard__form__input label {
   display: block;
   font-size: 14px;
-  margin-bottom: 12px;
   font-weight: 600;
   text-transform: capitalize;
   color: var(--blackColor);
@@ -11252,10 +11251,19 @@ Breadcrumb Area
   border: 2px solid var(--borderColor);
   border-radius: 6px;
   line-height: 23px;
-  padding: 10px 20px;
+  padding: 12px 20px;
   font-size: 14px;
   color: var(--contentColor);
-  margin-bottom: 15px;
+}
+.dashboard select {
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid var(--borderColor);
+  border-radius: 6px;
+  line-height: 23px;
+  padding: 13px 20px;
+  font-size: 14px;
+  color: var(--contentColor);
 }
 .dashboard__form__input textarea {
   width: 100%;
@@ -11266,7 +11274,6 @@ Breadcrumb Area
   padding: 10px 20px;
   font-size: 14px;
   color: var(--contentColor);
-  margin-bottom: 15px;
 }
 .dashboard .counterarea__text__wraper {
   margin-bottom: 0;
