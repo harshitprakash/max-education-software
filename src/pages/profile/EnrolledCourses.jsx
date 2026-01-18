@@ -84,7 +84,7 @@ const MyCourses = () => {
       : "/img/grid/grid_1.png";
 
     return (
-      <div key={course.enrollmentId} className="col-xl-4 col-lg-6 col-md-6 col-12 mb-4">
+      <div key={course.enrollmentId} className="col-xl-6 col-lg-6 col-md-6 col-12 mb-4">
         <div className="gridarea__wraper">
           <div className="gridarea__img">
             <button
@@ -133,11 +133,7 @@ const MyCourses = () => {
                     {formatDate(course.completionDate)}
                   </li>
                 )}
-                {course.courseModules && course.courseModules.length > 0 && (
-                  <li>
-                    <i className="icofont-book-alt"></i> {course.courseModules.length} Module{course.courseModules.length !== 1 ? 's' : ''}
-                  </li>
-                )}
+             
               </ul>
             </div>
             <div className="gridarea__heading">
@@ -165,24 +161,7 @@ const MyCourses = () => {
                 </p>
               )}
             </div>
-            <div className="gridarea__price">
-              {hasDiscount ? (
-                <>
-                  {formatAmount(finalPrice)}{" "}
-                  <del>{formatAmount(course.price)}</del>
-                  <span className="text-success ms-2">
-                    <small>(Save {formatAmount(discount)})</small>
-                  </span>
-                </>
-              ) : (
-                formatAmount(course.price)
-              )}
-              {course.pricingType && (
-                <span className="ms-2">
-                  <small className="badge bg-secondary">({course.pricingType})</small>
-                </span>
-              )}
-            </div>
+            
             <div className="gridarea__bottom">
               <div className="d-flex justify-content-between align-items-center w-100 flex-wrap gap-2">
                 <div>
@@ -214,107 +193,40 @@ const MyCourses = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Batches Information */}
-            {course.batches && course.batches.length > 0 && (
-              <div className="mt-2">
-                <small className="text-muted d-block mb-1">
-                  <i className="icofont-users-alt"></i> <strong>Batches:</strong>
-                </small>
-                {course.batches.map((batch, idx) => (
-                  <small key={batch.id} className="d-block text-muted ms-3 mb-1">
-                    • {batch.name} ({formatBatchTime(batch)})
-                    {batch.description && (
-                      <span className="text-muted"> - {batch.description}</span>
-                    )}
-                  </small>
-                ))}
-              </div>
-            )}
-
-            {/* Payment Information */}
-            <div className="mt-2 p-2 bg-light rounded">
-              <div className="d-flex justify-content-between align-items-center mb-1">
-                <small className="text-muted">
-                  <i className="icofont-wallet"></i> <strong>Payment:</strong>
-                </small>
-                <small className="fw-bold text-primary">
-                  {formatAmount(course.totalPaid || 0)} / {formatAmount(course.totalDue || course.price)}
-                </small>
-              </div>
-              {course.remainingBalance > 0 && (
-                <div className="d-flex justify-content-between align-items-center">
-                  <small className="text-warning">
-                    <i className="icofont-exclamation-circle"></i> Remaining:
-                  </small>
-                  <small className="fw-bold text-warning">
-                    {formatAmount(course.remainingBalance)}
-                  </small>
-                </div>
-              )}
-              {course.feePayments && course.feePayments.length > 0 && (
-                <div className="mt-1">
-                  <small className="text-muted">
-                    <i className="icofont-list"></i> {course.feePayments.length} Payment{course.feePayments.length !== 1 ? 's' : ''} made
-                  </small>
-                </div>
-              )}
-            </div>
-
-            {/* Course Modules Preview */}
-            {course.courseModules && course.courseModules.length > 0 && (
-              <div className="mt-2">
-                <small className="text-muted d-block mb-1">
-                  <i className="icofont-book"></i> <strong>Modules:</strong>
-                </small>
-                <div className="d-flex flex-wrap gap-1">
-                  {course.courseModules.slice(0, 3).map((module) => (
-                    <span key={module.id} className="badge bg-light text-dark">
-                      {module.title}
-                    </span>
-                  ))}
-                  {course.courseModules.length > 3 && (
-                    <span className="badge bg-secondary">
-                      +{course.courseModules.length - 3} more
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
           <div className="grid__course__status populerarea__button">
             <div className="progress mb-2">
-              <div
-                className={`progress-bar ${
-                  progressWidth === 100 ? "bg-success" : "bg-primary"
-                }`}
-                style={{ width: `${progressWidth}%` }}
-                role="progressbar"
-              >
+                <div
+                  className={`progress-bar ${
+                    progressWidth === 100 ? "bg-success" : "bg-primary"
+                  }`}
+                  style={{ width: `${progressWidth}%` }}
+                  role="progressbar"
+                >
                 {progressWidth}% Complete
               </div>
             </div>
-            {isCompleted ? (
-              <button 
-                className="default__button" 
-                type="button"
-                onClick={() => {
-                  toast.info("Certificate download feature coming soon");
-                }}
-              >
-                Download Certificate
-              </button>
-            ) : (
-              <button
-                className="default__button"
-                type="button"
-                onClick={() => {
-                  navigate(`/coursedetails/${course.courseId}`);
-                }}
-              >
-                Continue Learning
-              </button>
-            )}
+                  {isCompleted ? (
+                    <button 
+                      className="default__button" 
+                      type="button"
+                      onClick={() => {
+                        toast.info("Certificate download feature coming soon");
+                      }}
+                    >
+                      Download Certificate
+                    </button>
+                  ) : (
+                    <button
+                      className="default__button"
+                      type="button"
+                      onClick={() => {
+                        navigate(`/coursedetails/${course.courseId}`);
+                      }}
+                    >
+                      Continue Learning
+                    </button>
+                  )}
           </div>
         </div>
       </div>
@@ -322,99 +234,150 @@ const MyCourses = () => {
   };
 
   return (
-    <>
-      <ProfileHeader />
-        <div className="dashboard">
-            <div className="container-fluid full__width__padding">
-                <div className="row">
-            <Sidebar />
-                    <div className="col-xl-9 col-lg-9 col-md-12">
-                        <div className="dashboard__content__wraper">
-                            <div className="dashboard__section__title">
-                            <h4>My Courses</h4>
-                            </div>
+   <>
+  <ProfileHeader />
+  <div className="dashboard">
+    <div className="container-fluid full__width__padding">
+      <div className="row">
+        <Sidebar />
+        <div className="col-xl-9 col-lg-9 col-md-12">
+          <div className="dashboard__content__wraper">
+            <div className="dashboard__section__title mb-4">
+              <h4 className="fw-bold">My Courses</h4>
+            </div>
 
-                <ul
-                  className="nav about__button__wrap dashboard__button__wrap"
-                  id="myTab"
-                  role="tablist"
+            {/* Responsive Tabs – using #5F2DED theme */}
+            <ul className="nav nav-pills mb-4 flex-nowrap overflow-auto gap-3 pb-2" id="myTab" role="tablist">
+              <li className="nav-item" role="presentation">
+                <button
+                  className={`nav-link px-4 py-2 rounded-pill fw-medium ${
+                    key === "enrolled"
+                      ? "text-white border-0"
+                      : "bg-white text-muted border border-secondary-subtle"
+                  }`}
+                  style={key === "enrolled" ? { backgroundColor: "#5F2DED" } : {}}
+                  onClick={() => setKey("enrolled")}
+                  type="button"
                 >
-                            <li className="nav-item" role="presentation">
-                                <button
-                      className={`single__tab__link ${
-                        key === "enrolled" ? "active" : ""
-                      }`}
-                                onClick={() => setKey("enrolled")}
-                                type="button"
-                                >
-                      Enrolled Courses ({courses.length})
-                                </button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button
-                      className={`single__tab__link ${
-                        key === "active" ? "active" : ""
-                      }`}
-                                onClick={() => setKey("active")}
-                                type="button"
-                                >
-                      Active Courses (
-                      {courses.filter((c) => c.status === "Active").length})
-                                </button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button
-                      className={`single__tab__link ${
-                        key === "completed" ? "active" : ""
-                      }`}
-                                onClick={() => setKey("completed")}
-                                type="button"
-                                >
-                      Completed Courses (
-                      {courses.filter((c) => c.status === "Completed").length})
-                                </button>
-                            </li>
-                            </ul>
+                  Enrolled Courses
+                  <span
+                    className="badge ms-2 px-2 rounded-pill"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: key === "enrolled" ? "#5F2DED" : "#6c757d",
+                    }}
+                  >
+                    {courses.length}
+                  </span>
+                </button>
+              </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  className={`nav-link px-4 py-2 rounded-pill fw-medium ${
+                    key === "active"
+                      ? "text-white border-0"
+                      : "bg-white text-muted border border-secondary-subtle"
+                  }`}
+                  style={key === "active" ? { backgroundColor: "#5F2DED" } : {}}
+                  onClick={() => setKey("active")}
+                  type="button"
+                >
+                  Active Courses
+                  <span
+                    className="badge ms-2 px-2 rounded-pill"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: key === "active" ? "#5F2DED" : "#6c757d",
+                    }}
+                  >
+                    {courses.filter((c) => c.status === "Active").length}
+                  </span>
+                </button>
+              </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  className={`nav-link px-4 py-2 rounded-pill fw-medium ${
+                    key === "completed"
+                      ? "text-white border-0"
+                      : "bg-white text-muted border border-secondary-subtle"
+                  }`}
+                  style={key === "completed" ? { backgroundColor: "#5F2DED" } : {}}
+                  onClick={() => setKey("completed")}
+                  type="button"
+                >
+                  Completed Courses
+                  <span
+                    className="badge ms-2 px-2 rounded-pill"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: key === "completed" ? "#5F2DED" : "#6c757d",
+                    }}
+                  >
+                    {courses.filter((c) => c.status === "Completed").length}
+                  </span>
+                </button>
+              </li>
+            </ul>
 
-                            <div className="tab-content tab__content__wrapper" id="myTabContent">
-                                <div className="tab-pane fade show active">
-                    {isLoading ? (
-                      <div className="text-center py-5">
-                        <div className="spinner-border text-primary" role="status">
-                          <span className="visually-hidden">Loading...</span>
-                                        </div>
-                        <p className="mt-3">Loading courses...</p>
-                                        </div>
-                    ) : error ? (
-                      <div className="text-center py-5 text-danger">
-                        <i className="icofont-close-circled fs-1"></i>
-                        <p className="mt-3">{error}</p>
-                        <button
-                          className="btn btn-primary mt-2"
-                          onClick={() => window.location.reload()}
-                        >
-                          Retry
-                        </button>
-                                        </div>
-                    ) : filteredCourses.length === 0 ? (
-                      <div className="text-center py-5 text-muted">
-                        <i className="icofont-book fs-1"></i>
-                        <p className="mt-3">
-                          No {key === "enrolled" ? "enrolled" : key === "active" ? "active" : "completed"}{" "}
-                          courses found
-                        </p>
-                                            </div>
-                    ) : (
-                      <div className="row">{filteredCourses.map(renderCourseCard)}</div>
-                    )}
-                            </div>
-                        </div>
+            <div className="tab-content tab__content__wrapper" id="myTabContent">
+              <div className="tab-pane fade show active">
+                {isLoading ? (
+                  <div className="text-center py-5 my-5">
+                    <div
+                      className="spinner-border"
+                      style={{ width: "3rem", height: "3rem", color: "#5F2DED" }}
+                      role="status"
+                    >
+                      <span className="visually-hidden">Loading...</span>
                     </div>
-                </div>
-            </div>    
+                    <p className="mt-4 text-muted fs-5">Loading your courses...</p>
+                  </div>
+                ) : error ? (
+                  <div className="text-center py-5 my-5">
+                    <i className="icofont-close-circled text-danger" style={{ fontSize: "4.5rem" }}></i>
+                    <p className="mt-3 fs-5 text-danger">{error}</p>
+                    <button
+                      className="btn btn-lg px-5 mt-3 text-white shadow-sm"
+                      style={{ backgroundColor: "#5F2DED", borderColor: "#5F2DED" }}
+                      onClick={() => window.location.reload()}
+                    >
+                      Retry
+                    </button>
+                  </div>
+                ) : filteredCourses.length === 0 ? (
+                  <div className="text-center py-5 my-5 bg-white rounded-3 border border-secondary-subtle">
+                    <i
+                      className="icofont-book-alt text-muted"
+                      style={{ fontSize: "5.5rem", opacity: 0.4 }}
+                    ></i>
+                    <h5 className="mt-4 text-muted">
+                      No{" "}
+                      {key === "enrolled"
+                        ? "enrolled"
+                        : key === "active"
+                        ? "active"
+                        : "completed"}{" "}
+                      courses found
+                    </h5>
+                    <p className="text-muted mb-0">
+                      {key === "completed"
+                        ? "Finish some courses to see them here!"
+                        : "Start exploring and enroll in new courses"}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="row g-4">
+                    {filteredCourses.map(renderCourseCard)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
+  </div>
+</>
   );
 };
 

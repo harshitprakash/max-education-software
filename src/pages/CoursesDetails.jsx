@@ -172,7 +172,7 @@ const CourseDetails = () => {
                 {/* Category Badge */}
                 {categoryName && (
                   <div className="mb-4" data-aos="fade-up">
-                    <span className="badge bg-primary me-2 p-2">
+                    <span className="badge me-2 p-2" style={{backgroundColor:'#5F2DED'}}>
                       <i className="icofont-tags me-1"></i>
                       {categoryName}
                     </span>
@@ -191,40 +191,37 @@ const CourseDetails = () => {
                   />
                 </div>
 
-                {/* Category Description */}
-                {categoryDescription && (
-                  <div className="mb-4" data-aos="fade-up">
-                    <h5 className="mb-3">Category: {categoryName}</h5>
-                    <div 
-                      className="text-muted" 
-                      style={{ lineHeight: '1.8' }}
-                      dangerouslySetInnerHTML={{
-                        __html: categoryDescription
-                      }}
-                    />
-                  </div>
-                )}
-
-                {/* Course Modules */}
+             {/* Course Modules */}
                 {modules.length > 0 && (
                   <div className="mb-4" data-aos="fade-up">
                     <h5 className="mb-3">Course Modules</h5>
                     <div className="row g-4">
                       {modules.map((module, index) => (
                         <div key={module.id} className="col-12">
-                          <div className="card border-0 shadow-sm h-100">
-                            <div className="row g-0">
+                          
+                          <div
+                            className="card border-0 shadow-sm"
+                            style={{
+                              borderRadius: '10px',
+                              backgroundColor: '#ffffff',
+                              overflow: 'hidden',
+                              border: '1px solid #eee'
+                            }}
+                          >
+                            <div className="row g-0 align-items-stretch">
+
+                              {/* IMAGE */}
                               {module.imageUrl && (
                                 <div className="col-md-4">
                                   <img
                                     src={module.imageUrl}
                                     alt={module.title}
-                                    className="img-fluid rounded-start"
+                                    className="img-fluid"
                                     style={{
                                       width: '100%',
                                       height: '100%',
-                                      objectFit: 'cover',
-                                      minHeight: '200px'
+                                      minHeight: '200px',
+                                      objectFit: 'cover'
                                     }}
                                     onError={(e) => {
                                       e.target.src = "/img/courses/basic_course.jpg";
@@ -232,26 +229,63 @@ const CourseDetails = () => {
                                   />
                                 </div>
                               )}
+
+                              {/* CONTENT */}
                               <div className={module.imageUrl ? "col-md-8" : "col-12"}>
-                                <div className="card-body">
-                                  <div className="d-flex align-items-start mb-2">
-                                    <span className="badge bg-primary me-2" style={{ fontSize: '0.875rem' }}>
-                                      Module {index + 1}
-                                    </span>
+                                <div
+                                  className="card-body"
+                                  style={{
+                                    backgroundColor: '#fafafa',
+                                    padding: '20px 22px'
+                                  }}
+                                >
+                                  
+                                  <div
+                                    style={{
+                                      display: 'inline-block',
+                                      backgroundColor: '#5F2DED',
+                                      color: '#fff',
+                                      fontSize: '0.85rem',
+                                      padding: '6px 12px',
+                                      borderRadius: '6px',
+                                      marginBottom: '10px'
+                                    }}
+                                  >
+                                    Module {index + 1}
                                   </div>
-                                  <h6 className="card-title mb-2" style={{ fontWeight: '600' }}>
+
+                                  <h6
+                                    style={{
+                                      fontWeight: 600,
+                                      fontSize: '1.05rem',
+                                      marginTop: '6px',
+                                      marginBottom: '6px',
+                                      color: '#222'
+                                    }}
+                                  >
                                     {module.title}
                                   </h6>
+
                                   {module.subtitle && (
-                                    <p className="text-muted small mb-2" style={{ fontStyle: 'italic' }}>
+                                    <p
+                                      style={{
+                                        fontStyle: 'italic',
+                                        color: '#6c757d',
+                                        fontSize: '0.87rem',
+                                        marginBottom: '8px'
+                                      }}
+                                    >
                                       {module.subtitle}
                                     </p>
                                   )}
+
                                   {module.description && (
-                                    <div 
-                                      className="card-text text-muted small" 
-                                      style={{ lineHeight: '1.6' }}
-                                      
+                                    <div
+                                      style={{
+                                        color: '#555',
+                                        lineHeight: '1.6',
+                                        fontSize: '0.9rem'
+                                      }}
                                       dangerouslySetInnerHTML={{
                                         __html: module.description
                                       }}
@@ -259,13 +293,17 @@ const CourseDetails = () => {
                                   )}
                                 </div>
                               </div>
+
                             </div>
                           </div>
+
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
+
+
               </div>
             </div>
 
@@ -299,7 +337,7 @@ const CourseDetails = () => {
                     )}
                     {!packagePrice && price > 0 && (
                       <>
-                        <h3 className="fw-bold text-primary mb-0">
+                        <h3 className="fw-bold text-black mb-0">
                           {formatAmount(price)}
                         </h3>
                         <p className="text-muted small mt-1 mb-2">

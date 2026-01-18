@@ -57,9 +57,11 @@ html.is_dark {
   color: crimson !important;
 }
 
-.card:hover .card-text {
+.card:hover .card-text{
   color: #fff !important;
 }
+
+
 
 /* Base: Make SVG follow text color */
 .subject-icon svg {
@@ -72,7 +74,7 @@ html.is_dark {
 }
 
 .card:hover .subject-icon svg,
-.card:hover .subject-icon i {
+.card:hover .subject-icon i{
   color: #fff;
   background-color: #5F2DED;
   transform: scale(1.2);

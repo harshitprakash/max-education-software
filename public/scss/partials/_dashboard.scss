@@ -465,7 +465,6 @@
             padding: 10px 20px;
             font-size: 14px;
             color:var(--contentColor) ;
-            margin-bottom: 15px;
 
 
         }
@@ -478,7 +477,6 @@
             padding: 10px 20px;
             font-size: 14px;
             color: var(--contentColor);
-            margin-bottom: 15px;
         }
     }
     .counterarea__text__wraper {
@@ -626,7 +624,7 @@
     padding: 10px 20px;
     font-size: 14px;
     color: var(--contentColor);
-    margin-bottom: 15px;
+    margin-bottom: -15px;
 
    }
    &__small{

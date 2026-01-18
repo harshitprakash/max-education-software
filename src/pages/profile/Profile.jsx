@@ -350,375 +350,415 @@ const Profile = () => {
                                     <>
                                         {isEditing ? (
                                             <form onSubmit={handleSubmit}>
-                                                {/* Personal Information Section */}
-                                                <div className="dashboard__content__wraper mb-3">
-                                                    <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
-                                                        Personal Information
-                                                    </h5>
-                                                    <div className="row">
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="First Name"
-                                                                name="firstName"
-                                                                type="text"
-                                                                value={formData.firstName || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.firstName}
-                                                                required
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Middle Name"
-                                                                name="middleName"
-                                                                type="text"
-                                                                value={formData.middleName || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.middleName}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Last Name"
-                                                                name="lastName"
-                                                                type="text"
-                                                                value={formData.lastName || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.lastName}
-                                                                required
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Date of Birth"
-                                                                name="dateOfBirth"
-                                                                type="date"
-                                                                value={formData.dateOfBirth || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.dateOfBirth}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Select
-                                                                label="Gender"
-                                                                name="gender"
-                                                                value={formData.gender || ''}
-                                                                onChange={handleInputChange}
-                                                                options={genderOptions}
-                                                                error={formErrors.gender}
-                                                                placeholder="Select Gender"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Select
-                                                                label="Category"
-                                                                name="category"
-                                                                value={formData.category || ''}
-                                                                onChange={handleInputChange}
-                                                                options={categoryOptions}
-                                                                error={formErrors.category}
-                                                                placeholder="Select Category"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Aadhar Number"
-                                                                name="aadharNumber"
-                                                                type="text"
-                                                                value={formData.aadharNumber || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.aadharNumber}
-                                                                placeholder="12-digit Aadhar number"
-                                                                maxLength={12}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
+
+                                        {/* Personal Information Section */}
+                                        <div className="dashboard__content__wraper">
+                                            <h5 className="mb-1" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
+                                            Personal Information
+                                            </h5>
+                                            <div className="row">
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="First Name"
+                                                name="firstName"
+                                                type="text"
+                                                value={formData.firstName || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.firstName}
+                                                required
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6 mb-sm-auto">
+                                                <Input
+                                                label="Middle Name"
+                                                name="middleName"
+                                                type="text"
+                                                value={formData.middleName || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.middleName}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Last Name"
+                                                name="lastName"
+                                                type="text"
+                                                value={formData.lastName || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.lastName}
+                                                required
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Date of Birth"
+                                                name="dateOfBirth"
+                                                type="date"
+                                                value={formData.dateOfBirth || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.dateOfBirth}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            {/* Gender Select (REPLACED) */}
+                                            <div className="col-lg-6 col-md-6">
+                                                <div className="dashboard">
+                                                <label className="form-label">Gender</label>
+                                                <select
+                                                    name="gender"
+                                                    value={formData.gender || ''}
+                                                    onChange={handleInputChange}
+                                                    className="form-select"
+                                                >
+                                                    <option value="">Select Gender</option>
+                                                    {genderOptions.map(opt => (
+                                                    <option key={opt.value || opt} value={opt.value || opt}>
+                                                        {opt.label || opt}
+                                                    </option>
+                                                    ))}
+                                                </select>
+                                                {formErrors.gender && <div className="text-danger mt-1">{formErrors.gender}</div>}
+                                                </div>
+                                            </div>
+
+                                            {/* Category Select (REPLACED) */}
+                                            <div className="col-lg-6 col-md-6">
+                                                <div className="dashboard">
+                                                <label className="form-label">Category</label>
+                                                <select
+                                                    name="category"
+                                                    value={formData.category || ''}
+                                                    onChange={handleInputChange}
+                                                    className="form-select"
+                                                >
+                                                    <option value="">Select Category</option>
+                                                    {categoryOptions.map(opt => (
+                                                    <option key={opt.value || opt} value={opt.value || opt}>
+                                                        {opt.label || opt}
+                                                    </option>
+                                                    ))}
+                                                </select>
+                                                {formErrors.category && <div className="text-danger mt-1">{formErrors.category}</div>}
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Aadhar Number"
+                                                name="aadharNumber"
+                                                type="text"
+                                                value={formData.aadharNumber || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.aadharNumber}
+                                                placeholder="12-digit Aadhar number"
+                                                maxLength={12}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Contact Information Section */}
+                                        <div className="dashboard__content__wraper mb-3">
+                                            <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
+                                            Contact Information
+                                            </h5>
+                                            <div className="row">
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Email"
+                                                name="email"
+                                                type="email"
+                                                value={profileData.email || ''}
+                                                disabled
+                                                wrapperClassName="dashboard"
+                                                />
+                                                <small className="text-muted">Email cannot be changed</small>
+                                            </div>
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Phone Number"
+                                                name="phoneNumber"
+                                                type="tel"
+                                                value={formData.phoneNumber || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.phoneNumber}
+                                                placeholder="+91 9876543210"
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Address Information Section */}
+                                        <div className="dashboard__content__wraper mb-3">
+                                            <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
+                                            Address Information
+                                            </h5>
+                                            <div className="row">
+                                            <div className="col-lg-12">
+                                                <Textarea
+                                                label="Address"
+                                                name="address"
+                                                value={formData.address || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.address}
+                                                rows={3}
+                                                placeholder="Enter your complete address"
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-4 col-md-6">
+                                                <Input
+                                                label="City"
+                                                name="city"
+                                                type="text"
+                                                value={formData.city || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.city}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-4 col-md-6">
+                                                <Input
+                                                label="State"
+                                                name="state"
+                                                type="text"
+                                                value={formData.state || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.state}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-4 col-md-6">
+                                                <Input
+                                                label="Country"
+                                                name="country"
+                                                type="text"
+                                                value={formData.country || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.country}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-4 col-md-6">
+                                                <Input
+                                                label="Pincode"
+                                                name="pincode"
+                                                type="text"
+                                                value={formData.pincode || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.pincode}
+                                                placeholder="6-digit pincode"
+                                                maxLength={6}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Academic Information Section */}
+                                        <div className="dashboard__content__wraper mb-3">
+                                            <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
+                                            Academic Information
+                                            </h5>
+                                            <div className="row">
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Qualification"
+                                                name="qualification"
+                                                type="text"
+                                                value={formData.qualification || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.qualification}
+                                                placeholder="e.g., 10th, 12th, Graduation"
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Occupation"
+                                                name="occupation"
+                                                type="text"
+                                                value={formData.occupation || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.occupation}
+                                                placeholder="Your current occupation"
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Batch Timing"
+                                                name="batchTiming"
+                                                type="text"
+                                                value={formData.batchTiming || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.batchTiming}
+                                                placeholder="e.g., Morning 9:00 AM - 12:00 PM"
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Guardian Information Section */}
+                                        <div className="dashboard__content__wraper mb-3">
+                                            <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
+                                            Guardian Information
+                                            </h5>
+                                            <div className="row">
+
+                                            {/* Guardian Type (REPLACED) */}
+                                            <div className="col-lg-6 col-md-6">
+                                                <div className="dashboard mb-3">
+                                                <label className="form-label">Guardian Type</label>
+                                                <select
+                                                    name="guardianType"
+                                                    value={formData.guardianType || ''}
+                                                    onChange={handleInputChange}
+                                                    className="form-select"
+                                                >
+                                                    <option value="">Select Guardian Type</option>
+                                                    {guardianTypeOptions.map(opt => (
+                                                    <option key={opt.value || opt} value={opt.value || opt}>
+                                                        {opt.label || opt}
+                                                    </option>
+                                                    ))}
+                                                </select>
+                                                {formErrors.guardianType && <div className="text-danger mt-1">{formErrors.guardianType}</div>}
+                                                </div>
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Guardian Name"
+                                                name="guardianName"
+                                                type="text"
+                                                value={formData.guardianName || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.guardianName}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Father's Name"
+                                                name="fatherName"
+                                                type="text"
+                                                value={formData.fatherName || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.fatherName}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Father's Mobile"
+                                                name="fatherMobile"
+                                                type="tel"
+                                                value={formData.fatherMobile || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.fatherMobile}
+                                                placeholder="+91 9876543210"
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+
+                                            <div className="col-lg-6 col-md-6">
+                                                <Input
+                                                label="Husband's Name"
+                                                name="husbandName"
+                                                type="text"
+                                                value={formData.husbandName || ''}
+                                                onChange={handleInputChange}
+                                                error={formErrors.husbandName}
+                                                wrapperClassName="dashboard"
+                                                />
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Registration Section */}
+                                        <div className="dashboard__content__wraper mb-3">
+                                            <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
+                                            Registration Information
+                                            </h5>
+                                            <div className="row">
+                                            {profileData.registrationNumber && (
+                                                <>
+                                                <div className="col-lg-4 col-md-4">
+                                                    <div className="dashboard__form">Registration Number</div>
+                                                </div>
+                                                <div className="col-lg-8 col-md-8">
+                                                    <div className="dashboard__form">{profileData.registrationNumber}</div>
+                                                </div>
+                                                </>
+                                            )}
+
+                                            {profileData.enrollmentDate && (
+                                                <>
+                                                <div className="col-lg-4 col-md-4">
+                                                    <div className="dashboard__form dashboard__form__margin">Enrollment Date</div>
+                                                </div>
+                                                <div className="col-lg-8 col-md-8">
+                                                    <div className="dashboard__form dashboard__form__margin">
+                                                    {formatDate(profileData.enrollmentDate)}
                                                     </div>
                                                 </div>
+                                                </>
+                                            )}
 
-                                                {/* Contact Information Section */}
-                                                <div className="dashboard__content__wraper mb-3">
-                                                    <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
-                                                        Contact Information
-                                                    </h5>
-                                                    <div className="row">
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Email"
-                                                                name="email"
-                                                                type="email"
-                                                                value={profileData.email || ''}
-                                                                disabled
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                            <small className="text-muted">Email cannot be changed</small>
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Phone Number"
-                                                                name="phoneNumber"
-                                                                type="tel"
-                                                                value={formData.phoneNumber || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.phoneNumber}
-                                                                placeholder="+91 9876543210"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
+                                            {profileData.branchName && (
+                                                <>
+                                                <div className="col-lg-4 col-md-4">
+                                                    <div className="dashboard__form dashboard__form__margin">Branch</div>
+                                                </div>
+                                                <div className="col-lg-8 col-md-8">
+                                                    <div className="dashboard__form dashboard__form__margin">
+                                                    {profileData.branchName}
                                                     </div>
                                                 </div>
+                                                </>
+                                            )}
+                                            </div>
+                                        </div>
 
-                                                {/* Address Information Section */}
-                                                <div className="dashboard__content__wraper mb-3">
-                                                    <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
-                                                        Address Information
-                                                    </h5>
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <Textarea
-                                                                label="Address"
-                                                                name="address"
-                                                                value={formData.address || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.address}
-                                                                rows={3}
-                                                                placeholder="Enter your complete address"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-4 col-md-6">
-                                                            <Input
-                                                                label="City"
-                                                                name="city"
-                                                                type="text"
-                                                                value={formData.city || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.city}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-4 col-md-6">
-                                                            <Input
-                                                                label="State"
-                                                                name="state"
-                                                                type="text"
-                                                                value={formData.state || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.state}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-4 col-md-6">
-                                                            <Input
-                                                                label="Country"
-                                                                name="country"
-                                                                type="text"
-                                                                value={formData.country || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.country}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-4 col-md-6">
-                                                            <Input
-                                                                label="Pincode"
-                                                                name="pincode"
-                                                                type="text"
-                                                                value={formData.pincode || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.pincode}
-                                                                placeholder="6-digit pincode"
-                                                                maxLength={6}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                       {/* Actions */}
+                                        <div className="col-lg-12">
+                                        <div className="d-flex gap-2 mt-3 justify-content-end">
+                                            <button type="submit" className="default__button" disabled={isSaving}>
+                                            {isSaving ? 'Saving...' : 'Save Changes'}
+                                            </button>
 
-                                                {/* Academic Information Section */}
-                                                <div className="dashboard__content__wraper mb-3">
-                                                    <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
-                                                        Academic Information
-                                                    </h5>
-                                                    <div className="row">
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Qualification"
-                                                                name="qualification"
-                                                                type="text"
-                                                                value={formData.qualification || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.qualification}
-                                                                placeholder="e.g., 10th, 12th, Graduation"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Occupation"
-                                                                name="occupation"
-                                                                type="text"
-                                                                value={formData.occupation || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.occupation}
-                                                                placeholder="Your current occupation"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Batch Timing"
-                                                                name="batchTiming"
-                                                                type="text"
-                                                                value={formData.batchTiming || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.batchTiming}
-                                                                placeholder="e.g., Morning 9:00 AM - 12:00 PM"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <button
+                                            type="button"
+                                            className="default__button"
+                                            onClick={handleCancel}
+                                            disabled={isSaving}
+                                            style={{ backgroundColor: '#6c757d', borderColor: '#6c757d' }}
+                                            >
+                                            Cancel
+                                            </button>
+                                        </div>
+                                        </div>
 
-                                                {/* Guardian Information Section */}
-                                                <div className="dashboard__content__wraper mb-3">
-                                                    <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
-                                                        Guardian Information
-                                                    </h5>
-                                                    <div className="row">
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Select
-                                                                label="Guardian Type"
-                                                                name="guardianType"
-                                                                value={formData.guardianType || ''}
-                                                                onChange={handleInputChange}
-                                                                options={guardianTypeOptions}
-                                                                error={formErrors.guardianType}
-                                                                placeholder="Select Guardian Type"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Guardian Name"
-                                                                name="guardianName"
-                                                                type="text"
-                                                                value={formData.guardianName || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.guardianName}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Father's Name"
-                                                                name="fatherName"
-                                                                type="text"
-                                                                value={formData.fatherName || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.fatherName}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Father's Mobile"
-                                                                name="fatherMobile"
-                                                                type="tel"
-                                                                value={formData.fatherMobile || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.fatherMobile}
-                                                                placeholder="+91 9876543210"
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <Input
-                                                                label="Husband's Name"
-                                                                name="husbandName"
-                                                                type="text"
-                                                                value={formData.husbandName || ''}
-                                                                onChange={handleInputChange}
-                                                                error={formErrors.husbandName}
-                                                                wrapperClassName="dashboard mb-3"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                {/* Read-only Information Section */}
-                                                <div className="dashboard__content__wraper mb-3">
-                                                    <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
-                                                        Registration Information
-                                                    </h5>
-                                                    <div className="row">
-                                                        {profileData.registrationNumber && (
-                                                            <>
-                                                                <div className="col-lg-4 col-md-4">
-                                                                    <div className="dashboard__form">Registration Number</div>
-                                                                </div>
-                                                                <div className="col-lg-8 col-md-8">
-                                                                    <div className="dashboard__form">
-                                                                        {profileData.registrationNumber}
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        )}
-                                                        {profileData.enrollmentDate && (
-                                                            <>
-                                                                <div className="col-lg-4 col-md-4">
-                                                                    <div className="dashboard__form dashboard__form__margin">Enrollment Date</div>
-                                                                </div>
-                                                                <div className="col-lg-8 col-md-8">
-                                                                    <div className="dashboard__form dashboard__form__margin">
-                                                                        {formatDate(profileData.enrollmentDate)}
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        )}
-                                                        {profileData.branchName && (
-                                                            <>
-                                                                <div className="col-lg-4 col-md-4">
-                                                                    <div className="dashboard__form dashboard__form__margin">Branch</div>
-                                                                </div>
-                                                                <div className="col-lg-8 col-md-8">
-                                                                    <div className="dashboard__form dashboard__form__margin">
-                                                                        {profileData.branchName}
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </div>
+                                        </form>
 
-                                                {/* Form Actions */}
-                                                <div className="col-lg-12">
-                                                    <div className="d-flex gap-2 mt-3">
-                                                        <button
-                                                            type="submit"
-                                                            className="default__button"
-                                                            disabled={isSaving}
-                                                        >
-                                                            {isSaving ? 'Saving...' : 'Save Changes'}
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className="default__button"
-                                                            onClick={handleCancel}
-                                                            disabled={isSaving}
-                                                            style={{ backgroundColor: '#6c757d', borderColor: '#6c757d' }}
-                                                        >
-                                                            Cancel
-                                                        </button>
-                                                    </div>
-                            </div>
-                                            </form>
                                         ) : (
                                             <>
                                                 {/* Personal Information Section */}
@@ -726,29 +766,29 @@ const Profile = () => {
                                                     <h5 className="mb-3" style={{ color: '#5f2ded', borderBottom: '2px solid #5f2ded', paddingBottom: '10px' }}>
                                                         Personal Information
                                                     </h5>
-                            <div className="row">
+                                                    <div className="row">
                                                         {profileData.fullName && (
                                                             <>
-                                <div className="col-lg-4 col-md-4">
-                                                                    <div className="dashboard__form">Full Name</div>
-                                </div>
-                                <div className="col-lg-8 col-md-8">
-                                                                    <div className="dashboard__form">
-                                                                        {profileData.fullName}
-                                                                    </div>
-                                </div>
+                                                        <div className="col-lg-4 col-md-4">
+                                                        <div className="dashboard__form">Full Name</div>
+                                                        </div>
+                                                        <div className="col-lg-8 col-md-8">
+                                                            <div className="dashboard__form">
+                                                                {profileData.fullName}
+                                                            </div>
+                                                        </div>
                                                             </>
                                                         )}
                                                         {profileData.firstName && (
                                                             <>
-                                <div className="col-lg-4 col-md-4">
-                                    <div className="dashboard__form dashboard__form__margin">First Name</div>
-                                </div>
-                                <div className="col-lg-8 col-md-8">
-                                                                    <div className="dashboard__form dashboard__form__margin">
+                                                        <div className="col-lg-4 col-md-4">
+                                                            <div className="dashboard__form dashboard__form__margin">First Name</div>
+                                                        </div>
+                                                        <div className="col-lg-8 col-md-8">
+                                                            <div className="dashboard__form dashboard__form__margin">
                                                                         {profileData.firstName}
-                                                                    </div>
-                                                                </div>
+                                                            </div>
+                                                        </div>
                                                             </>
                                                         )}
                                                         {profileData.middleName && (
@@ -824,7 +864,7 @@ const Profile = () => {
                                                             </>
                                                         )}
                                                     </div>
-                                </div>
+                                                </div>
 
                                                 {/* Contact Information Section */}
                                                 <div className="dashboard__content__wraper mb-3">
