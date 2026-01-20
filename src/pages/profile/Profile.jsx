@@ -410,12 +410,12 @@ const Profile = () => {
                                             {/* Gender Select (REPLACED) */}
                                             <div className="col-lg-6 col-md-6">
                                                 <div className="dashboard">
-                                                <label className="form-label">Gender</label>
+                                                <label className="form-label" style={{fontSize:'13px',fontWeight:'bold',marginBottom:'-1px'}}>Gender</label>
                                                 <select
                                                     name="gender"
                                                     value={formData.gender || ''}
                                                     onChange={handleInputChange}
-                                                    className="form-select"
+                                                    wrapperClassName="dashboard"
                                                 >
                                                     <option value="">Select Gender</option>
                                                     {genderOptions.map(opt => (
@@ -431,12 +431,12 @@ const Profile = () => {
                                             {/* Category Select (REPLACED) */}
                                             <div className="col-lg-6 col-md-6">
                                                 <div className="dashboard">
-                                                <label className="form-label">Category</label>
+                                                <label className="form-label" style={{fontSize:'13px',fontWeight:'bold',marginBottom:'-1px'}}>Category</label>
                                                 <select
                                                     name="category"
                                                     value={formData.category || ''}
                                                     onChange={handleInputChange}
-                                                    className="form-select"
+                                                    wrapperClassName="dashboard"
                                                 >
                                                     <option value="">Select Category</option>
                                                     {categoryOptions.map(opt => (
@@ -623,12 +623,12 @@ const Profile = () => {
                                             {/* Guardian Type (REPLACED) */}
                                             <div className="col-lg-6 col-md-6">
                                                 <div className="dashboard mb-3">
-                                                <label className="form-label">Guardian Type</label>
+                                                <label className="form-label" style={{fontSize:'13px',fontWeight:'bold',marginBottom:'-1px'}}>Guardian Type</label>
                                                 <select
                                                     name="guardianType"
                                                     value={formData.guardianType || ''}
                                                     onChange={handleInputChange}
-                                                    className="form-select"
+                                                    wrapperClassName="dashboard"
                                                 >
                                                     <option value="">Select Guardian Type</option>
                                                     {guardianTypeOptions.map(opt => (

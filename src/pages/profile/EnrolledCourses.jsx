@@ -108,7 +108,65 @@ const MyCourses = () => {
             </div>
           </div>
           <div className="gridarea__content">
-            <div className="gridarea__list">
+           
+            <div className="gridarea__heading">
+              <h3>
+                <button
+                  type="button"
+                  className="border-0 bg-transparent p-0 text-start text-decoration-none"
+                  onClick={() => {
+                    navigate(`/coursedetails/${course.courseId}`);
+                  }}
+                  title={course.courseDescription || course.courseName}
+                >
+                  <b>{course.courseName}</b> 
+                </button>
+              </h3>
+              {course.courseDescription && (
+                <p className="text-muted small mt-2" style={{
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {course.courseDescription.replace(/<[^>]*>/g, '').substring(0, 100)}...
+                </p>
+              )}
+            </div>
+            
+              
+
+            <div className="gridarea__bottom">
+              <div className="d-flex justify-content-between align-items-center w-100 flex-wrap gap-2">
+                <div>
+                  <span className={`badge ${
+                    course.status === "Active" ? "bg-success" :
+                    course.status === "Completed" ? "bg-primary" :
+                    "bg-secondary"
+                  } me-2`}>
+                    {course.status}
+                  </span>
+                  {/* {course.paymentStatus && (
+                    <span
+                      className={`badge ${
+                        course.paymentStatus === "Paid"
+                          ? "bg-success"
+                          : course.paymentStatus === "Pending"
+                          ? "bg-warning"
+                          : "bg-danger"
+                      }`}
+                    >
+                      {course.paymentStatus}
+                    </span>
+                  )} */}
+                  {course.grade && (
+                    <span className="badge bg-info ms-2">
+                      Grade: {course.grade}
+                    </span>
+                  )}
+                </div>
+                 <div className="gridarea__list">
               <ul>
                 {course.batches && course.batches.length > 0 && (
                   <li>
@@ -136,66 +194,11 @@ const MyCourses = () => {
              
               </ul>
             </div>
-            <div className="gridarea__heading">
-              <h3>
-                <button
-                  type="button"
-                  className="border-0 bg-transparent p-0 text-start text-decoration-none"
-                  onClick={() => {
-                    navigate(`/coursedetails/${course.courseId}`);
-                  }}
-                  title={course.courseDescription || course.courseName}
-                >
-                  {course.courseName}
-                </button>
-              </h3>
-              {course.courseDescription && (
-                <p className="text-muted small mt-2" style={{
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}>
-                  {course.courseDescription.replace(/<[^>]*>/g, '').substring(0, 100)}...
-                </p>
-              )}
-            </div>
-            
-            <div className="gridarea__bottom">
-              <div className="d-flex justify-content-between align-items-center w-100 flex-wrap gap-2">
-                <div>
-                  <span className={`badge ${
-                    course.status === "Active" ? "bg-success" :
-                    course.status === "Completed" ? "bg-primary" :
-                    "bg-secondary"
-                  } me-2`}>
-                    {course.status}
-                  </span>
-                  {course.paymentStatus && (
-                    <span
-                      className={`badge ${
-                        course.paymentStatus === "Paid"
-                          ? "bg-success"
-                          : course.paymentStatus === "Pending"
-                          ? "bg-warning"
-                          : "bg-danger"
-                      }`}
-                    >
-                      {course.paymentStatus}
-                    </span>
-                  )}
-                  {course.grade && (
-                    <span className="badge bg-info ms-2">
-                      Grade: {course.grade}
-                    </span>
-                  )}
-                </div>
               </div>
             </div>
           </div>
           <div className="grid__course__status populerarea__button">
-            <div className="progress mb-2">
+            {/* <div className="progress mb-2">
                 <div
                   className={`progress-bar ${
                     progressWidth === 100 ? "bg-success" : "bg-primary"
@@ -205,7 +208,7 @@ const MyCourses = () => {
                 >
                 {progressWidth}% Complete
               </div>
-            </div>
+            </div> */}
                   {isCompleted ? (
                     <button 
                       className="default__button" 
