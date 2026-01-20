@@ -116,9 +116,9 @@ const CourseDetails = () => {
 
               <div className="course__details__top--2">
                 <div className="course__button__wraper" data-aos="fade-up">
-                  <div className="course__button">
+                  {/* <div className="course__button">
                     <span className="course__2">{courseCode || "Course"}</span>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="course__details__heading mt-3" data-aos="fade-up">
                   <h3>{courseName}</h3>
@@ -280,11 +280,12 @@ const CourseDetails = () => {
                                   )}
 
                                   {module.description && (
-                                    <div
+                                    <div 
                                       style={{
                                         color: '#555',
                                         lineHeight: '1.6',
-                                        fontSize: '0.9rem'
+                                        fontSize: '0.9rem',
+                                        marginBottom:'10 px'
                                       }}
                                       dangerouslySetInnerHTML={{
                                         __html: module.description
@@ -324,7 +325,7 @@ const CourseDetails = () => {
                   </div>
 
                   {/* Pricing */}
-                  <div className="text-center mb-4">
+                  {/* <div className="text-center mb-4">
                     {packagePrice > 0 && (
                       <>
                         <h3 className="fw-bold text-primary mb-0">
@@ -354,7 +355,7 @@ const CourseDetails = () => {
                         </p>
                       </div>
                     )}
-                  </div>
+                  </div> */}
 
                   {/* Enroll Button */}
                   <div className="course__summery__button mb-4">
